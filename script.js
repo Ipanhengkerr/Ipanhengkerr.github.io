@@ -693,18 +693,34 @@ function initMusicPlayer() {
         player.classList.remove('playing');
     }
     
-    // Auto-play on first user interaction (click/scroll/touch anywhere)
+    // Auto-play on first user interaction (click/touch anywhere)
+    let hasAutoPlayed = false;
+    
     function autoPlayOnInteraction() {
-        startPlaying();
-        // Remove listeners after first trigger
-        document.removeEventListener('click', autoPlayOnInteraction);
-        document.removeEventListener('scroll', autoPlayOnInteraction);
-        document.removeEventListener('touchstart', autoPlayOnInteraction);
+        if (hasAutoPlayed) return;
+        
+        audio.play().then(() => {
+            hasAutoPlayed = true;
+            toggleBtn.querySelector('.music-icon-play').style.display = 'none';
+            toggleBtn.querySelector('.music-icon-pause').style.display = 'inline';
+            player.classList.add('playing', 'expanded');
+            setTimeout(() => {
+                player.classList.remove('expanded');
+            }, 3000);
+            // Only remove listeners after successful play
+            document.removeEventListener('click', autoPlayOnInteraction);
+            document.removeEventListener('touchstart', autoPlayOnInteraction);
+            document.removeEventListener('keydown', autoPlayOnInteraction);
+        }).catch(err => {
+            // Keep listeners alive so next real interaction can try again
+            console.log('Audio play attempt, waiting for interaction...');
+        });
     }
     
-    document.addEventListener('click', autoPlayOnInteraction, { once: false });
-    document.addEventListener('scroll', autoPlayOnInteraction, { once: false });
-    document.addEventListener('touchstart', autoPlayOnInteraction, { once: false });
+    // Only use click/touch/keydown — browsers trust these as real interactions
+    document.addEventListener('click', autoPlayOnInteraction);
+    document.addEventListener('touchstart', autoPlayOnInteraction);
+    document.addEventListener('keydown', autoPlayOnInteraction);
     
     // Manual Play/Pause toggle
     toggleBtn.addEventListener('click', (e) => {
