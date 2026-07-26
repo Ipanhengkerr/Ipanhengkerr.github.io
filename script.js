@@ -2,23 +2,122 @@
 // JUJUTSU KAISEN PORTFOLIO - MAIN JS
 // ===================================
 
-// Motivational Quotes Database
+// Motivational Quotes Database with Character Info
 const quotes = [
-    { text: "Code is like humor. When you have to explain it, it's bad.", character: "Cory House" },
-    { text: "First, solve the problem. Then, write the code.", character: "John Johnson" },
-    { text: "Experience is the name everyone gives to their mistakes.", character: "Oscar Wilde" },
-    { text: "In order to be irreplaceable, one must always be different.", character: "Coco Chanel" },
-    { text: "The only way to do great work is to love what you do.", character: "Steve Jobs" },
-    { text: "Innovation distinguishes between a leader and a follower.", character: "Steve Jobs" },
-    { text: "Simplicity is the soul of efficiency.", character: "Austin Freeman" },
-    { text: "Make it work, make it right, make it fast.", character: "Kent Beck" },
-    { text: "Clean code always looks like it was written by someone who cares.", character: "Robert C. Martin" },
-    { text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", character: "Martin Fowler" },
-    { text: "Programming isn't about what you know; it's about what you can figure out.", character: "Chris Pine" },
-    { text: "The best error message is the one that never shows up.", character: "Thomas Fuchs" },
-    { text: "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.", character: "Antoine de Saint-Exupery" },
-    { text: "Code never lies, comments sometimes do.", character: "Ron Jeffries" }
+    { 
+        text: "Code is like humor. When you have to explain it, it's bad.", 
+        character: "Cory House",
+        characterId: "gojo",
+        characterImage: "https://i.imgur.com/placeholder-gojo.png" // Will use CSS gradient as fallback
+    },
+    { 
+        text: "First, solve the problem. Then, write the code.", 
+        character: "John Johnson",
+        characterId: "sukuna",
+        characterImage: ""
+    },
+    { 
+        text: "Experience is the name everyone gives to their mistakes.", 
+        character: "Oscar Wilde",
+        characterId: "yuji",
+        characterImage: ""
+    },
+    { 
+        text: "In order to be irreplaceable, one must always be different.", 
+        character: "Coco Chanel",
+        characterId: "nobara",
+        characterImage: ""
+    },
+    { 
+        text: "The only way to do great work is to love what you do.", 
+        character: "Steve Jobs",
+        characterId: "gojo",
+        characterImage: ""
+    },
+    { 
+        text: "Innovation distinguishes between a leader and a follower.", 
+        character: "Steve Jobs",
+        characterId: "megumi",
+        characterImage: ""
+    },
+    { 
+        text: "Simplicity is the soul of efficiency.", 
+        character: "Austin Freeman",
+        characterId: "gojo",
+        characterImage: ""
+    },
+    { 
+        text: "Make it work, make it right, make it fast.", 
+        character: "Kent Beck",
+        characterId: "yuji",
+        characterImage: ""
+    },
+    { 
+        text: "Clean code always looks like it was written by someone who cares.", 
+        character: "Robert C. Martin",
+        characterId: "megumi",
+        characterImage: ""
+    },
+    { 
+        text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", 
+        character: "Martin Fowler",
+        characterId: "gojo",
+        characterImage: ""
+    },
+    { 
+        text: "Programming isn't about what you know; it's about what you can figure out.", 
+        character: "Chris Pine",
+        characterId: "yuji",
+        characterImage: ""
+    },
+    { 
+        text: "The best error message is the one that never shows up.", 
+        character: "Thomas Fuchs",
+        characterId: "sukuna",
+        characterImage: ""
+    },
+    { 
+        text: "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.", 
+        character: "Antoine de Saint-Exupery",
+        characterId: "gojo",
+        characterImage: ""
+    },
+    { 
+        text: "Code never lies, comments sometimes do.", 
+        character: "Ron Jeffries",
+        characterId: "sukuna",
+        characterImage: ""
+    }
 ];
+
+// Character visual themes (will use CSS gradients as background)
+const characterThemes = {
+    gojo: {
+        gradient: 'radial-gradient(circle at 70% 50%, rgba(69, 176, 210, 0.4) 0%, rgba(86, 74, 148, 0.2) 40%, transparent 70%)',
+        silhouette: '∞', // Infinity symbol for Gojo
+        style: 'color: rgba(69, 176, 210, 0.8); text-shadow: 0 0 80px rgba(69, 176, 210, 0.8);'
+    },
+    sukuna: {
+        gradient: 'radial-gradient(circle at 30% 50%, rgba(220, 20, 60, 0.4) 0%, rgba(139, 0, 0, 0.2) 40%, transparent 70%)',
+        silhouette: '⛩️', // Shrine for Sukuna
+        style: 'color: rgba(220, 20, 60, 0.8); text-shadow: 0 0 80px rgba(220, 20, 60, 0.8);'
+    },
+    yuji: {
+        gradient: 'radial-gradient(circle at 50% 50%, rgba(220, 20, 60, 0.3) 0%, rgba(255, 69, 0, 0.2) 40%, transparent 70%)',
+        silhouette: '⚡',
+        style: 'color: rgba(220, 20, 60, 0.7); text-shadow: 0 0 60px rgba(220, 20, 60, 0.7);'
+    },
+    megumi: {
+        gradient: 'radial-gradient(circle at 50% 50%, rgba(86, 74, 148, 0.4) 0%, rgba(72, 61, 139, 0.2) 40%, transparent 70%)',
+        silhouette: '🐺',
+        style: 'color: rgba(86, 74, 148, 0.8); text-shadow: 0 0 70px rgba(86, 74, 148, 0.8);'
+    },
+    nobara: {
+        gradient: 'radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.4) 0%, rgba(255, 99, 71, 0.2) 40%, transparent 70%)',
+        silhouette: '🔨',
+        style: 'color: rgba(255, 140, 0, 0.8); text-shadow: 0 0 70px rgba(255, 140, 0, 0.8);'
+    }
+};
 
 // State Management
 const state = {
@@ -78,6 +177,7 @@ function cacheElements() {
     elements.depthIndicator = document.getElementById('depth-indicator');
     elements.domainExpansion = document.getElementById('domain-expansion');
     elements.quoteDisplay = document.getElementById('quote-display');
+    elements.characterOverlay = document.getElementById('character-overlay');
     elements.particleCanvas = document.getElementById('particle-canvas');
     elements.sections = document.querySelectorAll('.section');
 }
@@ -309,17 +409,76 @@ function showRandomQuote() {
         quoteAuthor.textContent = `— ${quote.character}`;
     }
     
+    // Show character background
+    showCharacterBackground(quote.characterId);
+    
     // Show quote
     elements.quoteDisplay.classList.add('active');
     
     // Hide after 3 seconds
     setTimeout(() => {
         elements.quoteDisplay.classList.remove('active');
+        hideCharacterBackground();
         setTimeout(() => {
             state.isQuoteShowing = false;
         }, 400);
     }, 3000);
 }
+
+// ===================================
+// CHARACTER BACKGROUND DISPLAY
+// ===================================
+function showCharacterBackground(characterId) {
+    if (!elements.characterOverlay) return;
+    
+    const theme = characterThemes[characterId];
+    if (!theme) return;
+    
+    const characterImage = elements.characterOverlay.querySelector('.character-image');
+    
+    // Remove all character classes
+    elements.characterOverlay.className = 'character-overlay';
+    
+    // Add character-specific class
+    elements.characterOverlay.classList.add(characterId);
+    
+    // Apply gradient background
+    if (characterImage) {
+        characterImage.style.background = theme.gradient;
+        
+        // Add emoji/icon as visual element with character-specific styling
+        characterImage.innerHTML = `<div style="
+            position: absolute;
+            top: 50%;
+            left: ${characterId === 'gojo' ? '70%' : characterId === 'sukuna' ? '30%' : '50%'};
+            transform: translate(-50%, -50%);
+            font-size: clamp(15rem, 30vw, 25rem);
+            opacity: 0.3;
+            ${theme.style}
+            animation: characterPulse 3s ease-in-out infinite;
+        ">${theme.silhouette}</div>`;
+    }
+    
+    // Show overlay
+    elements.characterOverlay.classList.add('active');
+}
+
+function hideCharacterBackground() {
+    if (!elements.characterOverlay) return;
+    
+    elements.characterOverlay.classList.remove('active');
+    
+    // Clean up after animation
+    setTimeout(() => {
+        elements.characterOverlay.className = 'character-overlay';
+        const characterImage = elements.characterOverlay.querySelector('.character-image');
+        if (characterImage) {
+            characterImage.style.background = '';
+            characterImage.innerHTML = '';
+        }
+    }, 600);
+}
+
 
 
 // ===================================
