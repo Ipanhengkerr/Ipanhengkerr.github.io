@@ -1,95 +1,336 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>War Project</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 600px;
-            text-align: center;
-        }
-        
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
-        
-        p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        .status {
-            margin-top: 30px;
-            padding: 15px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            font-size: 0.9em;
-            color: #555;
-        }
-    </style>
+    <meta name="description" content="Portfolio website with Jujutsu Kaisen theme - Domain Expansion awaits">
+    <meta name="author" content="Your Name">
+    <title>Domain Expansion | JJK Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 War Project</h1>
-        <p>Selamat datang di project War! Website ini sudah online dan bisa diakses secara public.</p>
-        <button class="btn" onclick="showMessage()">Klik Saya!</button>
-        <div class="status">
-            <strong>Status:</strong> ✅ Online dan Public<br>
-            <strong>Hosting:</strong> GitHub Pages
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <h1 class="loading-title">領域展開</h1>
+            <p class="loading-subtitle">Domain Expansion</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
         </div>
     </div>
+
+    <!-- Particle Canvas for Cursed Energy -->
+    <canvas id="particle-canvas"></canvas>
     
-    <script>
-        function showMessage() {
-            alert('Halo! Website Anda sudah berhasil online 🎉');
-        }
-        
-        // Tambahkan waktu akses
-        document.addEventListener('DOMContentLoaded', function() {
-            const now = new Date().toLocaleString('id-ID');
-            const statusDiv = document.querySelector('.status');
-            statusDiv.innerHTML += '<br><strong>Diakses pada:</strong> ' + now;
-        });
-    </script>
+    <!-- Domain Expansion Overlay -->
+    <div id="domain-expansion" class="domain-expansion"></div>
+    
+    <!-- Quote Display -->
+    <div id="quote-display" class="quote-display">
+        <div class="quote-content">
+            <p class="quote-text"></p>
+            <p class="quote-author"></p>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">領域展開</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Expertise</a></li>
+                <li><a href="#credentials" class="nav-link">Credentials</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Depth Indicator -->
+    <div class="depth-indicator" id="depth-indicator">
+        <span class="depth-label">DEPTH</span>
+        <span class="depth-value">0m</span>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="section hero-section" data-depth="0">
+            <div class="hero-content">
+                <div class="hero-subtitle">Depth 0 meters</div>
+                <h1 class="hero-title">
+                    <span class="glitch" data-text="Domain Expansion">Domain Expansion</span>
+                </h1>
+                <p class="hero-tagline">Unleashing the Power of Cursed Techniques</p>
+                <p class="hero-description">
+                    Jujutsu Sorcerer specializing in web development and digital sorcery. 
+                    Master of modern frameworks and infinite possibilities.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary" data-domain-trigger>View Techniques</a>
+                    <a href="#contact" class="btn btn-secondary">Initiate Contact</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <div class="scroll-arrow">↓</div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about-section" data-depth="200">
+            <div class="container">
+                <div class="section-header">
+                    <span class="depth-label">DEPTH: 200m · ABOUT</span>
+                    <h2 class="section-title animate-on-scroll">Who's behind<br>the technique.</h2>
+                </div>
+                <div class="terminal-container animate-on-scroll">
+                    <div class="terminal-header">
+                        <span class="terminal-title">JUJUTSU_TERMINAL - bash</span>
+                        <div class="terminal-buttons">
+                            <span class="terminal-btn close"></span>
+                            <span class="terminal-btn minimize"></span>
+                            <span class="terminal-btn maximize"></span>
+                        </div>
+                    </div>
+                    <div class="terminal-body">
+                        <p><span class="terminal-prompt">sorcerer@domain</span> ~ $ whoami</p>
+                        <p class="terminal-output">Full Stack Jujutsu Sorcerer</p>
+                        <p><span class="terminal-prompt">sorcerer@domain</span> ~ $ cat profile.cfg</p>
+                        <div class="terminal-output">
+                            <p><span class="config-key">NAME</span>        Your Name Here</p>
+                            <p><span class="config-key">LOCATION</span>    Jakarta, Indonesia</p>
+                            <p><span class="config-key">INSTITUTION</span> University / Company Name</p>
+                            <p><span class="config-key">GRADE</span>       Special Grade Developer</p>
+                            <p><span class="config-key">TECHNIQUE</span>   React, Node.js, TypeScript</p>
+                            <p><span class="config-key">DOMAIN</span>      Full Stack Development</p>
+                            <p><span class="config-key">STATUS</span>      <span class="status-active">ACTIVE ●</span></p>
+                        </div>
+                        <p><span class="terminal-prompt">sorcerer@domain</span> ~ $ <span class="cursor">_</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section skills-section" data-depth="500">
+            <div class="container">
+                <div class="section-header">
+                    <span class="depth-label">DEPTH: 500m · EXPERTISE</span>
+                    <h2 class="section-title animate-on-scroll">Technical<br>Capability Matrix.</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card animate-on-scroll" data-domain-trigger>
+                        <div class="skill-icon">⚡</div>
+                        <h3 class="skill-title">Frontend Sorcery</h3>
+                        <p class="skill-description">React, Vue, Next.js, TypeScript</p>
+                    </div>
+                    <div class="skill-card animate-on-scroll" data-domain-trigger>
+                        <div class="skill-icon">🔮</div>
+                        <h3 class="skill-title">Backend Techniques</h3>
+                        <p class="skill-description">Node.js, Express, MongoDB, PostgreSQL</p>
+                    </div>
+                    <div class="skill-card animate-on-scroll" data-domain-trigger>
+                        <div class="skill-icon">🌀</div>
+                        <h3 class="skill-title">DevOps Domain</h3>
+                        <p class="skill-description">Docker, AWS, CI/CD, Kubernetes</p>
+                    </div>
+                    <div class="skill-card animate-on-scroll" data-domain-trigger>
+                        <div class="skill-icon">⚔️</div>
+                        <h3 class="skill-title">Design Cursed Energy</h3>
+                        <p class="skill-description">Figma, UI/UX, Responsive Design</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Credentials Section -->
+        <section id="credentials" class="section credentials-section" data-depth="1000">
+            <div class="container">
+                <div class="section-header">
+                    <span class="depth-label">DEPTH: 1000m · CREDENTIALS</span>
+                    <h2 class="section-title animate-on-scroll">Certification<br>& Competition.</h2>
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="certification">Certification</button>
+                    <button class="filter-btn" data-filter="competition">Competition</button>
+                    <button class="filter-btn" data-filter="bootcamp">Bootcamp</button>
+                </div>
+                <div class="credentials-grid">
+                    <div class="credential-card animate-on-scroll" data-category="competition">
+                        <div class="credential-badge">🏆</div>
+                        <h3 class="credential-title">Champion - Domain Battle 2025</h3>
+                        <p class="credential-org">National Jujutsu Competition</p>
+                        <p class="credential-date">2025</p>
+                    </div>
+                    <div class="credential-card animate-on-scroll" data-category="certification">
+                        <div class="credential-badge">📜</div>
+                        <h3 class="credential-title">Special Grade Certification</h3>
+                        <p class="credential-org">Jujutsu Tech Academy</p>
+                        <p class="credential-date">2024</p>
+                    </div>
+                    <div class="credential-card animate-on-scroll" data-category="bootcamp">
+                        <div class="credential-badge">⚡</div>
+                        <h3 class="credential-title">Cursed Energy Bootcamp</h3>
+                        <p class="credential-org">Tokyo Tech Institute</p>
+                        <p class="credential-date">2024</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects-section" data-depth="2000">
+            <div class="container">
+                <div class="section-header">
+                    <span class="depth-label">DEPTH: 2000m · PROJECTS</span>
+                    <h2 class="section-title animate-on-scroll">Featured Techniques<br>& Domains.</h2>
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="web">Web App</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile</button>
+                    <button class="filter-btn" data-filter="tool">Tool</button>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card animate-on-scroll" data-category="web" data-domain-trigger>
+                        <div class="project-image">
+                            <div class="project-placeholder">🌐</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Infinite Void Dashboard</h3>
+                            <p class="project-description">Real-time analytics dashboard with infinite scroll and data visualization</p>
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">D3.js</span>
+                                <span class="tag">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card animate-on-scroll" data-category="web" data-domain-trigger>
+                        <div class="project-image">
+                            <div class="project-placeholder">⚔️</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Cursed Technique API</h3>
+                            <p class="project-description">RESTful API for managing complex data relationships</p>
+                            <div class="project-tags">
+                                <span class="tag">Express</span>
+                                <span class="tag">MongoDB</span>
+                                <span class="tag">JWT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card animate-on-scroll" data-category="tool" data-domain-trigger>
+                        <div class="project-image">
+                            <div class="project-placeholder">🔮</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Domain Expansion CLI</h3>
+                            <p class="project-description">Command-line tool for project scaffolding and automation</p>
+                            <div class="project-tags">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">CLI</span>
+                                <span class="tag">TypeScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section experience-section" data-depth="2500">
+            <div class="container">
+                <div class="section-header">
+                    <span class="depth-label">DEPTH: 2500m · EXPERIENCE</span>
+                    <h2 class="section-title animate-on-scroll">Professional<br>& Organizational.</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2024 - Present</span>
+                            <h3 class="timeline-title">Special Grade Sorcerer</h3>
+                            <p class="timeline-company">Jujutsu Tech Solutions</p>
+                            <p class="timeline-description">Leading development teams in building scalable web applications</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023 - 2024</span>
+                            <h3 class="timeline-title">Grade 1 Developer</h3>
+                            <p class="timeline-company">Cursed Energy Corp</p>
+                            <p class="timeline-description">Full-stack development with focus on performance optimization</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2022 - 2023</span>
+                            <h3 class="timeline-title">Jujutsu Apprentice</h3>
+                            <p class="timeline-company">Tokyo Tech Academy</p>
+                            <p class="timeline-description">Intensive training in modern web technologies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section" data-depth="3000">
+            <div class="container">
+                <div class="section-header">
+                    <span class="depth-label">SURFACE CALL · CONTACT</span>
+                    <h2 class="section-title animate-on-scroll">Initialize<br>Connection.</h2>
+                </div>
+                <div class="contact-content animate-on-scroll">
+                    <p class="contact-text">Ready to expand your domain? Let's collaborate and create something extraordinary.</p>
+                    <div class="contact-links">
+                        <a href="mailto:your.email@example.com" class="contact-link" data-domain-trigger>
+                            <span class="contact-icon">📧</span>
+                            <span>Email</span>
+                        </a>
+                        <a href="https://github.com/yourusername" target="_blank" class="contact-link" data-domain-trigger>
+                            <span class="contact-icon">💻</span>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-link" data-domain-trigger>
+                            <span class="contact-icon">💼</span>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://twitter.com/yourusername" target="_blank" class="contact-link" data-domain-trigger>
+                            <span class="contact-icon">🐦</span>
+                            <span>Twitter</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Domain Expansion - All rights reserved. Built with Cursed Energy.</p>
+            <p class="footer-depth">Depth: 0m</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
