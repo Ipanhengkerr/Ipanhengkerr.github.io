@@ -657,5 +657,99 @@ function scrollToTop() {
     });
 }
 
+// ===================================
+// MUSIC PLAYER
+// ===================================
+function initMusicPlayer() {
+    const audio = document.getElementById('bg-music');
+    const toggleBtn = document.getElementById('music-toggle');
+    const player = document.getElementById('music-player');
+    const progress = document.getElementById('music-progress');
+    const volumeSlider = document.getElementById('music-volume');
+    
+    if (!audio || !toggleBtn) return;
+    
+    // Set initial volume
+    audio.volume = 0.3;
+    
+    function startPlaying() {
+        audio.play().then(() => {
+            toggleBtn.querySelector('.music-icon-play').style.display = 'none';
+            toggleBtn.querySelector('.music-icon-pause').style.display = 'inline';
+            player.classList.add('playing', 'expanded');
+            // Collapse after 3 seconds
+            setTimeout(() => {
+                player.classList.remove('expanded');
+            }, 3000);
+        }).catch(err => {
+            console.log('Audio play blocked:', err);
+        });
+    }
+    
+    function stopPlaying() {
+        audio.pause();
+        toggleBtn.querySelector('.music-icon-play').style.display = 'inline';
+        toggleBtn.querySelector('.music-icon-pause').style.display = 'none';
+        player.classList.remove('playing');
+    }
+    
+    // Auto-play on first user interaction (click/scroll/touch anywhere)
+    function autoPlayOnInteraction() {
+        startPlaying();
+        // Remove listeners after first trigger
+        document.removeEventListener('click', autoPlayOnInteraction);
+        document.removeEventListener('scroll', autoPlayOnInteraction);
+        document.removeEventListener('touchstart', autoPlayOnInteraction);
+    }
+    
+    document.addEventListener('click', autoPlayOnInteraction, { once: false });
+    document.addEventListener('scroll', autoPlayOnInteraction, { once: false });
+    document.addEventListener('touchstart', autoPlayOnInteraction, { once: false });
+    
+    // Manual Play/Pause toggle
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent double-trigger with autoplay listener
+        if (audio.paused) {
+            startPlaying();
+        } else {
+            stopPlaying();
+        }
+    });
+    
+    // Update progress bar
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            if (progress) progress.style.width = percent + '%';
+        }
+    });
+    
+    // Click on progress bar to seek
+    const progressBar = document.querySelector('.music-progress-bar');
+    if (progressBar) {
+        progressBar.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        });
+    }
+    
+    // Volume control
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+    }
+    
+    console.log('🎵 Music Player Ready (auto-play on first interaction)');
+}
+
+// Add music player to init
+const originalInit = init;
+window.addEventListener('DOMContentLoaded', () => {
+    initMusicPlayer();
+});
+
 console.log('⚡ Portfolio System Active');
 console.log('🔮 Interactive Features Ready');
