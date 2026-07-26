@@ -2,120 +2,144 @@
 // JUJUTSU KAISEN PORTFOLIO - MAIN JS
 // ===================================
 
-// Motivational Quotes Database with Character Info
+// Motivational Quotes Database - Jujutsu Kaisen Characters
 const quotes = [
     { 
-        text: "Code is like humor. When you have to explain it, it's bad.", 
-        character: "Cory House",
+        text: "Terkuat itu menyedihkan, bukan? Karena tidak ada yang bisa memahami orang terkuat.", 
+        character: "Gojo Satoru",
         characterId: "gojo",
-        characterImage: "https://i.imgur.com/placeholder-gojo.png" // Will use CSS gradient as fallback
+        characterImage: ""
     },
     { 
-        text: "First, solve the problem. Then, write the code.", 
-        character: "John Johnson",
+        text: "Aku sendirian yang paling kuat. Tapi, aku ingin murid-muridku bisa berdiri di sampingku.", 
+        character: "Gojo Satoru",
+        characterId: "gojo",
+        characterImage: ""
+    },
+    { 
+        text: "Jangan khawatir. Aku yang terkuat.", 
+        character: "Gojo Satoru",
+        characterId: "gojo",
+        characterImage: ""
+    },
+    { 
+        text: "Apakah kau punya waktu luang? Saat itulah manusia merenungkan hal-hal yang tidak perlu.", 
+        character: "Gojo Satoru",
+        characterId: "gojo",
+        characterImage: ""
+    },
+    { 
+        text: "Ketahuilah tempatmu, bocah.", 
+        character: "Ryomen Sukuna",
         characterId: "sukuna",
         characterImage: ""
     },
     { 
-        text: "Experience is the name everyone gives to their mistakes.", 
-        character: "Oscar Wilde",
+        text: "Kau pikir berdiri di puncak membuatmu kuat? Menyedihkan.", 
+        character: "Ryomen Sukuna",
+        characterId: "sukuna",
+        characterImage: ""
+    },
+    { 
+        text: "Aku adalah api. Aku bukan sesuatu yang bisa kau padamkan begitu saja.", 
+        character: "Ryomen Sukuna",
+        characterId: "sukuna",
+        characterImage: ""
+    },
+    { 
+        text: "Aku bukan pahlawan. Tapi setidaknya, aku tidak ingin menjadi orang yang menyesal karena tidak bertindak.", 
+        character: "Itadori Yuji",
         characterId: "yuji",
         characterImage: ""
     },
     { 
-        text: "In order to be irreplaceable, one must always be different.", 
-        character: "Coco Chanel",
+        text: "Aku ingin mati dikelilingi orang-orang. Aku tidak ingin ada orang yang mati sendirian.", 
+        character: "Itadori Yuji",
+        characterId: "yuji",
+        characterImage: ""
+    },
+    { 
+        text: "Kakekku bilang, aku harus menolong orang lain. Karena aku kuat.", 
+        character: "Itadori Yuji",
+        characterId: "yuji",
+        characterImage: ""
+    },
+    { 
+        text: "Aku tidak akan menyerah. Bahkan kalau aku harus mati, aku akan menyelamatkan mereka.", 
+        character: "Fushiguro Megumi",
+        characterId: "megumi",
+        characterImage: ""
+    },
+    { 
+        text: "Aku tidak menyelamatkan orang karena itu benar. Aku menyelamatkan orang yang pantas diselamatkan.", 
+        character: "Fushiguro Megumi",
+        characterId: "megumi",
+        characterImage: ""
+    },
+    { 
+        text: "Kalau aku harus mati, aku akan mati dengan caraku sendiri!", 
+        character: "Kugisaki Nobara",
         characterId: "nobara",
         characterImage: ""
     },
     { 
-        text: "The only way to do great work is to love what you do.", 
-        character: "Steve Jobs",
-        characterId: "gojo",
+        text: "Jangan meremehkanku! Aku bukan tipe orang yang akan mundur hanya karena lawannya kuat!", 
+        character: "Kugisaki Nobara",
+        characterId: "nobara",
         characterImage: ""
     },
     { 
-        text: "Innovation distinguishes between a leader and a follower.", 
-        character: "Steve Jobs",
-        characterId: "megumi",
+        text: "Kerja lembur adalah kejahatan. Aku bekerja untuk hidup, bukan hidup untuk bekerja.", 
+        character: "Nanami Kento",
+        characterId: "nanami",
         characterImage: ""
     },
     { 
-        text: "Simplicity is the soul of efficiency.", 
-        character: "Austin Freeman",
-        characterId: "gojo",
-        characterImage: ""
-    },
-    { 
-        text: "Make it work, make it right, make it fast.", 
-        character: "Kent Beck",
-        characterId: "yuji",
-        characterImage: ""
-    },
-    { 
-        text: "Clean code always looks like it was written by someone who cares.", 
-        character: "Robert C. Martin",
-        characterId: "megumi",
-        characterImage: ""
-    },
-    { 
-        text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", 
-        character: "Martin Fowler",
-        characterId: "gojo",
-        characterImage: ""
-    },
-    { 
-        text: "Programming isn't about what you know; it's about what you can figure out.", 
-        character: "Chris Pine",
-        characterId: "yuji",
-        characterImage: ""
-    },
-    { 
-        text: "The best error message is the one that never shows up.", 
-        character: "Thomas Fuchs",
-        characterId: "sukuna",
-        characterImage: ""
-    },
-    { 
-        text: "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.", 
-        character: "Antoine de Saint-Exupery",
-        characterId: "gojo",
-        characterImage: ""
-    },
-    { 
-        text: "Code never lies, comments sometimes do.", 
-        character: "Ron Jeffries",
-        characterId: "sukuna",
+        text: "Orang dewasa seharusnya melindungi anak-anak. Itu bukan soal kuat atau lemah.", 
+        character: "Nanami Kento",
+        characterId: "nanami",
         characterImage: ""
     }
 ];
 
-// Character visual themes (will use CSS gradients as background)
+// Character visual themes with actual character images
 const characterThemes = {
     gojo: {
         gradient: 'radial-gradient(circle at 70% 50%, rgba(69, 176, 210, 0.4) 0%, rgba(86, 74, 148, 0.2) 40%, transparent 70%)',
-        silhouette: '∞', // Infinity symbol for Gojo
+        image: 'assets/characters/gojo.jpg',
+        glowColor: 'rgba(69, 176, 210, 0.6)',
         style: 'color: rgba(69, 176, 210, 0.8); text-shadow: 0 0 80px rgba(69, 176, 210, 0.8);'
     },
     sukuna: {
         gradient: 'radial-gradient(circle at 30% 50%, rgba(220, 20, 60, 0.4) 0%, rgba(139, 0, 0, 0.2) 40%, transparent 70%)',
-        silhouette: '⛩️', // Shrine for Sukuna
+        image: 'assets/characters/sukuna.jpg',
+        glowColor: 'rgba(220, 20, 60, 0.6)',
         style: 'color: rgba(220, 20, 60, 0.8); text-shadow: 0 0 80px rgba(220, 20, 60, 0.8);'
     },
     yuji: {
         gradient: 'radial-gradient(circle at 50% 50%, rgba(220, 20, 60, 0.3) 0%, rgba(255, 69, 0, 0.2) 40%, transparent 70%)',
-        silhouette: '⚡',
+        image: 'assets/characters/yuji.jpg',
+        glowColor: 'rgba(255, 69, 0, 0.5)',
         style: 'color: rgba(220, 20, 60, 0.7); text-shadow: 0 0 60px rgba(220, 20, 60, 0.7);'
     },
     megumi: {
         gradient: 'radial-gradient(circle at 50% 50%, rgba(86, 74, 148, 0.4) 0%, rgba(72, 61, 139, 0.2) 40%, transparent 70%)',
-        silhouette: '🐺',
+        image: 'assets/characters/megumi.jpg',
+        glowColor: 'rgba(86, 74, 148, 0.6)',
         style: 'color: rgba(86, 74, 148, 0.8); text-shadow: 0 0 70px rgba(86, 74, 148, 0.8);'
     },
     nobara: {
         gradient: 'radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.4) 0%, rgba(255, 99, 71, 0.2) 40%, transparent 70%)',
-        silhouette: '🔨',
+        image: 'assets/characters/nobara.jpg',
+        glowColor: 'rgba(255, 140, 0, 0.6)',
         style: 'color: rgba(255, 140, 0, 0.8); text-shadow: 0 0 70px rgba(255, 140, 0, 0.8);'
+    },
+    nanami: {
+        gradient: 'radial-gradient(circle at 60% 50%, rgba(218, 165, 32, 0.4) 0%, rgba(184, 134, 11, 0.2) 40%, transparent 70%)',
+        image: '',
+        cssOnly: true,
+        glowColor: 'rgba(218, 165, 32, 0.6)',
+        style: 'color: rgba(218, 165, 32, 0.8); text-shadow: 0 0 70px rgba(218, 165, 32, 0.8);'
     }
 };
 
@@ -442,24 +466,57 @@ function showCharacterBackground(characterId) {
     // Add character-specific class
     elements.characterOverlay.classList.add(characterId);
     
-    // Apply gradient background
+    // Apply actual character image as background
     if (characterImage) {
-        characterImage.style.background = theme.gradient;
-        
-        // Add emoji/icon as visual element with character-specific styling
-        characterImage.innerHTML = `<div style="
-            position: absolute;
-            top: 50%;
-            left: ${characterId === 'gojo' ? '70%' : characterId === 'sukuna' ? '30%' : '50%'};
-            transform: translate(-50%, -50%);
-            font-size: clamp(15rem, 30vw, 25rem);
-            opacity: 0.3;
-            ${theme.style}
-            animation: characterPulse 3s ease-in-out infinite;
-        ">${theme.silhouette}</div>`;
+        if (theme.cssOnly) {
+            // CSS-only mode for Nanami — golden ratio geometric lines
+            characterImage.style.background = theme.gradient;
+            characterImage.innerHTML = `
+            <div class="nanami-geo-container">
+                <div class="nanami-line nanami-line-1"></div>
+                <div class="nanami-line nanami-line-2"></div>
+                <div class="nanami-line nanami-line-3"></div>
+                <div class="nanami-line nanami-line-4"></div>
+                <div class="nanami-line nanami-line-5"></div>
+                <div class="nanami-line nanami-line-6"></div>
+                <div class="nanami-ratio">7 : 3</div>
+                <div class="nanami-circle nanami-circle-1"></div>
+                <div class="nanami-circle nanami-circle-2"></div>
+            </div>
+            <div style="
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                background: radial-gradient(ellipse at center, transparent 20%, rgba(10, 14, 26, 0.9) 100%);
+                pointer-events: none;
+            "></div>`;
+        } else {
+            // Image mode for other characters
+            const img = new Image();
+            img.src = theme.image;
+            
+            characterImage.style.backgroundImage = `${theme.gradient}, url('${theme.image}')`;
+            characterImage.style.backgroundSize = 'cover';
+            characterImage.style.backgroundPosition = 'center';
+            characterImage.style.backgroundRepeat = 'no-repeat';
+            
+            characterImage.innerHTML = `<div style="
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                background: radial-gradient(ellipse at center, transparent 30%, rgba(10, 14, 26, 0.85) 100%);
+                pointer-events: none;
+            "></div>
+            <div style="
+                position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
+                background: linear-gradient(to top, rgba(10, 14, 26, 1) 0%, transparent 100%);
+                pointer-events: none;
+            "></div>
+            <div style="
+                position: absolute; top: 0; left: 0; width: 100%; height: 30%;
+                background: linear-gradient(to bottom, rgba(10, 14, 26, 0.8) 0%, transparent 100%);
+                pointer-events: none;
+            "></div>`;
+        }
     }
     
-    // Show overlay
+    // Show overlay with smooth animation
     elements.characterOverlay.classList.add('active');
 }
 
@@ -468,15 +525,15 @@ function hideCharacterBackground() {
     
     elements.characterOverlay.classList.remove('active');
     
-    // Clean up after animation
+    // Clean up after fade-out animation completes
     setTimeout(() => {
         elements.characterOverlay.className = 'character-overlay';
         const characterImage = elements.characterOverlay.querySelector('.character-image');
         if (characterImage) {
-            characterImage.style.background = '';
+            characterImage.style.backgroundImage = '';
             characterImage.innerHTML = '';
         }
-    }, 600);
+    }, 800);
 }
 
 

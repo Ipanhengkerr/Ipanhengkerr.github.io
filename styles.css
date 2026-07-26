@@ -1077,7 +1077,7 @@ ul {
 }
 
 /* ===================================
-   CHARACTER OVERLAY
+   CHARACTER OVERLAY - SMOOTH IMAGE BG
    =================================== */
 .character-overlay {
     position: fixed;
@@ -1088,7 +1088,7 @@ ul {
     z-index: 9998;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .character-overlay.active {
@@ -1099,47 +1099,229 @@ ul {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: brightness(0.8) contrast(1.2);
-    opacity: 0.7;
-    animation: characterFadeIn 0.8s ease-out;
+    opacity: 0.5;
+    transform: scale(1.05);
+    animation: characterZoomIn 4s ease-out forwards;
+    transition: opacity 0.8s ease;
 }
 
-/* Character-specific positioning */
+/* Smooth zoom-in Ken Burns effect */
+@keyframes characterZoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(1.15);
+        filter: blur(8px) brightness(0.5);
+    }
+    30% {
+        opacity: 0.5;
+        filter: blur(2px) brightness(0.7);
+    }
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+        filter: blur(0px) brightness(0.7);
+    }
+}
+
+/* Character-specific color grading */
 .character-overlay.gojo .character-image {
-    background-position: right center;
-    filter: brightness(0.9) drop-shadow(0 0 50px rgba(69, 176, 210, 0.6));
+    filter: brightness(0.6) saturate(1.3);
+    animation: characterZoomIn 4s ease-out forwards, gojoGlow 3s ease-in-out infinite;
 }
 
 .character-overlay.sukuna .character-image {
-    background-position: left center;
-    filter: brightness(0.7) drop-shadow(0 0 50px rgba(220, 20, 60, 0.6));
+    filter: brightness(0.5) saturate(1.5);
+    animation: characterZoomIn 4s ease-out forwards, sukunaGlow 3s ease-in-out infinite;
 }
 
 .character-overlay.yuji .character-image {
-    background-position: center;
-    filter: brightness(0.85) drop-shadow(0 0 40px rgba(220, 20, 60, 0.4));
+    filter: brightness(0.55) saturate(1.3);
+    animation: characterZoomIn 4s ease-out forwards;
 }
 
 .character-overlay.megumi .character-image {
-    background-position: center;
-    filter: brightness(0.8) drop-shadow(0 0 40px rgba(86, 74, 148, 0.5));
+    filter: brightness(0.5) saturate(1.4);
+    animation: characterZoomIn 4s ease-out forwards, megumiGlow 3s ease-in-out infinite;
 }
 
 .character-overlay.nobara .character-image {
-    background-position: center;
-    filter: brightness(0.85) drop-shadow(0 0 40px rgba(255, 140, 0, 0.5));
+    filter: brightness(0.55) saturate(1.3);
+    animation: characterZoomIn 4s ease-out forwards;
 }
 
+.character-overlay.nanami .character-image {
+    filter: brightness(0.5) saturate(1.2) sepia(0.2);
+    animation: characterZoomIn 4s ease-out forwards;
+}
+
+/* Subtle breathing glow per character */
+@keyframes gojoGlow {
+    0%, 100% { box-shadow: inset 0 0 100px rgba(69, 176, 210, 0.1); }
+    50% { box-shadow: inset 0 0 150px rgba(69, 176, 210, 0.2); }
+}
+
+@keyframes sukunaGlow {
+    0%, 100% { box-shadow: inset 0 0 100px rgba(220, 20, 60, 0.1); }
+    50% { box-shadow: inset 0 0 150px rgba(220, 20, 60, 0.25); }
+}
+
+@keyframes megumiGlow {
+    0%, 100% { box-shadow: inset 0 0 100px rgba(86, 74, 148, 0.1); }
+    50% { box-shadow: inset 0 0 150px rgba(86, 74, 148, 0.2); }
+}
+
+/* ===================================
+   NANAMI CSS-ONLY GEOMETRIC EFFECT
+   =================================== */
+.nanami-geo-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    animation: nanamiContainerFadeIn 1s ease-out forwards;
+}
+
+@keyframes nanamiContainerFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Animated golden ratio lines */
+.nanami-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.4), transparent);
+    animation: nanamiLineSweep 3s ease-in-out infinite;
+}
+
+.nanami-line-1 {
+    width: 100%;
+    height: 1px;
+    top: 30%;
+    animation-delay: 0s;
+}
+
+.nanami-line-2 {
+    width: 100%;
+    height: 1px;
+    top: 70%;
+    animation-delay: 0.5s;
+}
+
+.nanami-line-3 {
+    width: 1px;
+    height: 100%;
+    left: 30%;
+    background: linear-gradient(180deg, transparent, rgba(218, 165, 32, 0.4), transparent);
+    animation: nanamiLineVertSweep 3.5s ease-in-out infinite;
+    animation-delay: 0.3s;
+}
+
+.nanami-line-4 {
+    width: 1px;
+    height: 100%;
+    left: 70%;
+    background: linear-gradient(180deg, transparent, rgba(218, 165, 32, 0.4), transparent);
+    animation: nanamiLineVertSweep 3.5s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+
+.nanami-line-5 {
+    width: 140%;
+    height: 1px;
+    top: 50%;
+    left: -20%;
+    transform: rotate(30deg);
+    transform-origin: center;
+    background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.25), transparent);
+    animation: nanamiLineSweep 4s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.nanami-line-6 {
+    width: 140%;
+    height: 1px;
+    top: 50%;
+    left: -20%;
+    transform: rotate(-30deg);
+    transform-origin: center;
+    background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.25), transparent);
+    animation: nanamiLineSweep 4s ease-in-out infinite;
+    animation-delay: 1.5s;
+}
+
+/* Golden ratio text */
+.nanami-ratio {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 700;
+    color: rgba(218, 165, 32, 0.12);
+    letter-spacing: 0.3em;
+    white-space: nowrap;
+    animation: nanamiRatioPulse 3s ease-in-out infinite;
+    text-shadow: 0 0 60px rgba(218, 165, 32, 0.15);
+}
+
+/* Pulsing circles */
+.nanami-circle {
+    position: absolute;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+    border-radius: 50%;
+    animation: nanamiCircleExpand 4s ease-out infinite;
+}
+
+.nanami-circle-1 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 0s;
+}
+
+.nanami-circle-2 {
+    width: 350px;
+    height: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 1s;
+}
+
+@keyframes nanamiLineSweep {
+    0%, 100% { opacity: 0.2; transform: scaleX(0.5); }
+    50% { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes nanamiLineVertSweep {
+    0%, 100% { opacity: 0.2; transform: scaleY(0.5); }
+    50% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes nanamiRatioPulse {
+    0%, 100% { opacity: 0.12; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.2; transform: translate(-50%, -50%) scale(1.03); }
+}
+
+@keyframes nanamiCircleExpand {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.5; border-color: rgba(218, 165, 32, 0.4); }
+    100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; border-color: rgba(218, 165, 32, 0); }
+}
 @keyframes characterFadeIn {
     0% {
         opacity: 0;
         transform: scale(1.1);
     }
     100% {
-        opacity: 0.7;
+        opacity: 0.5;
         transform: scale(1);
     }
 }
@@ -1159,12 +1341,24 @@ ul {
 @media (max-width: 768px) {
     .character-image {
         background-size: cover;
-        opacity: 0.5;
+        opacity: 0.35;
     }
     
-    .character-overlay.active .character-image > div {
-        font-size: clamp(10rem, 40vw, 15rem) !important;
-        opacity: 0.2 !important;
+    @keyframes characterZoomIn {
+        0% {
+            opacity: 0;
+            transform: scale(1.1);
+            filter: blur(5px) brightness(0.4);
+        }
+        30% {
+            opacity: 0.35;
+            filter: blur(1px) brightness(0.5);
+        }
+        100% {
+            opacity: 0.35;
+            transform: scale(1);
+            filter: blur(0px) brightness(0.5);
+        }
     }
 }
 
