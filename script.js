@@ -2,22 +2,22 @@
 // JUJUTSU KAISEN PORTFOLIO - MAIN JS
 // ===================================
 
-// JJK Character Quotes Database
-const jjkQuotes = [
-    { text: "Domain Expansion: Unlimited Void", character: "Gojo Satoru" },
-    { text: "I alone am the honored one", character: "Gojo Satoru" },
-    { text: "Throughout Heaven and Earth, I alone am the honored one", character: "Gojo Satoru" },
-    { text: "Stand proud. You're strong.", character: "Gojo Satoru" },
-    { text: "Love is the most twisted curse of all", character: "Geto Suguru" },
-    { text: "I'll show you the divide between you and me", character: "Ryomen Sukuna" },
-    { text: "Malevolent Shrine", character: "Ryomen Sukuna" },
-    { text: "Know your place, fool", character: "Ryomen Sukuna" },
-    { text: "I'm you, you're me", character: "Yuji Itadori & Todo Aoi" },
-    { text: "We're Jujutsu Sorcerers!", character: "Yuji Itadori" },
-    { text: "I refuse to regret the way I've lived", character: "Yuji Itadori" },
-    { text: "Are you strong because you're Gojo Satoru? Or are you Gojo Satoru because you're strong?", character: "Jogo" },
-    { text: "Technique Reversal: Red", character: "Gojo Satoru" },
-    { text: "Hollow Purple", character: "Gojo Satoru" }
+// Motivational Quotes Database
+const quotes = [
+    { text: "Code is like humor. When you have to explain it, it's bad.", character: "Cory House" },
+    { text: "First, solve the problem. Then, write the code.", character: "John Johnson" },
+    { text: "Experience is the name everyone gives to their mistakes.", character: "Oscar Wilde" },
+    { text: "In order to be irreplaceable, one must always be different.", character: "Coco Chanel" },
+    { text: "The only way to do great work is to love what you do.", character: "Steve Jobs" },
+    { text: "Innovation distinguishes between a leader and a follower.", character: "Steve Jobs" },
+    { text: "Simplicity is the soul of efficiency.", character: "Austin Freeman" },
+    { text: "Make it work, make it right, make it fast.", character: "Kent Beck" },
+    { text: "Clean code always looks like it was written by someone who cares.", character: "Robert C. Martin" },
+    { text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", character: "Martin Fowler" },
+    { text: "Programming isn't about what you know; it's about what you can figure out.", character: "Chris Pine" },
+    { text: "The best error message is the one that never shows up.", character: "Thomas Fuchs" },
+    { text: "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.", character: "Antoine de Saint-Exupery" },
+    { text: "Code never lies, comments sometimes do.", character: "Ron Jeffries" }
 ];
 
 // State Management
@@ -54,7 +54,7 @@ window.addEventListener('load', () => {
 });
 
 function init() {
-    console.log('🔮 Initializing Domain Expansion...');
+    console.log('🔮 Initializing Portfolio...');
     
     // Cache DOM elements
     cacheElements();
@@ -67,7 +67,7 @@ function init() {
     initDomainExpansion();
     initParticleSystem();
     
-    console.log('✅ Domain Expansion Complete!');
+    console.log('✅ Portfolio Ready!');
 }
 
 // Cache DOM Elements
@@ -289,12 +289,12 @@ function showRandomQuote() {
     
     // Get a quote that hasn't been shown recently
     let quote;
-    if (state.shownQuotes.length >= jjkQuotes.length) {
+    if (state.shownQuotes.length >= quotes.length) {
         state.shownQuotes = []; // Reset if all shown
     }
     
     do {
-        quote = jjkQuotes[Math.floor(Math.random() * jjkQuotes.length)];
+        quote = quotes[Math.floor(Math.random() * quotes.length)];
     } while (state.shownQuotes.includes(quote.text));
     
     state.shownQuotes.push(quote.text);
@@ -441,5 +441,5 @@ function scrollToTop() {
     });
 }
 
-console.log('⚡ Cursed Energy System Active');
-console.log('🔮 Domain Expansion Ready');
+console.log('⚡ Portfolio System Active');
+console.log('🔮 Interactive Features Ready');
