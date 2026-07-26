@@ -211,7 +211,50 @@ ul {
 
 @keyframes loading {
     0% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
     100% { transform: translateX(400%); }
+}
+
+.loading-enter-btn {
+    display: inline-block;
+    margin-top: 2.5rem;
+    padding: 1rem 3rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    color: var(--color-primary);
+    background: transparent;
+    border: 2px solid rgba(69, 176, 210, 0.4);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    animation: enterPulse 2s ease-in-out infinite;
+    opacity: 0;
+    animation: enterFadeIn 1s ease-out 2s forwards, enterPulse 2s ease-in-out 3s infinite;
+}
+
+.loading-enter-btn:hover {
+    background: rgba(69, 176, 210, 0.15);
+    border-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 0 30px rgba(69, 176, 210, 0.4), inset 0 0 20px rgba(69, 176, 210, 0.1);
+    transform: scale(1.05);
+    letter-spacing: 0.7em;
+}
+
+.loading-enter-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes enterFadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes enterPulse {
+    0%, 100% { border-color: rgba(69, 176, 210, 0.3); box-shadow: 0 0 10px rgba(69, 176, 210, 0.1); }
+    50% { border-color: rgba(69, 176, 210, 0.6); box-shadow: 0 0 25px rgba(69, 176, 210, 0.3); }
 }
 
 

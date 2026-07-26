@@ -166,13 +166,39 @@ const elements = {
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', init);
 
-// Hide loading screen when page fully loaded
+// Loading screen — wait for page load, then show ENTER button
 window.addEventListener('load', () => {
     const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
+    const enterBtn = document.getElementById('enter-btn');
+    
+    if (enterBtn && loadingScreen) {
+        // Show enter button after loading bar animation
         setTimeout(() => {
+            enterBtn.style.pointerEvents = 'auto';
+        }, 2000);
+        
+        // Click ENTER = dismiss loading screen + start music
+        enterBtn.addEventListener('click', () => {
             loadingScreen.classList.add('hidden');
-        }, 1000);
+            
+            // Start music (this click is a trusted user interaction!)
+            const audio = document.getElementById('bg-music');
+            const toggleBtn = document.getElementById('music-toggle');
+            const player = document.getElementById('music-player');
+            
+            if (audio) {
+                audio.play().then(() => {
+                    if (toggleBtn) {
+                        toggleBtn.querySelector('.music-icon-play').style.display = 'none';
+                        toggleBtn.querySelector('.music-icon-pause').style.display = 'inline';
+                    }
+                    if (player) {
+                        player.classList.add('playing', 'expanded');
+                        setTimeout(() => player.classList.remove('expanded'), 3000);
+                    }
+                }).catch(err => console.log('Audio:', err));
+            }
+        });
     }
 });
 
@@ -693,38 +719,8 @@ function initMusicPlayer() {
         player.classList.remove('playing');
     }
     
-    // Auto-play on first user interaction (click/touch anywhere)
-    let hasAutoPlayed = false;
-    
-    function autoPlayOnInteraction() {
-        if (hasAutoPlayed) return;
-        
-        audio.play().then(() => {
-            hasAutoPlayed = true;
-            toggleBtn.querySelector('.music-icon-play').style.display = 'none';
-            toggleBtn.querySelector('.music-icon-pause').style.display = 'inline';
-            player.classList.add('playing', 'expanded');
-            setTimeout(() => {
-                player.classList.remove('expanded');
-            }, 3000);
-            // Only remove listeners after successful play
-            document.removeEventListener('click', autoPlayOnInteraction);
-            document.removeEventListener('touchstart', autoPlayOnInteraction);
-            document.removeEventListener('keydown', autoPlayOnInteraction);
-        }).catch(err => {
-            // Keep listeners alive so next real interaction can try again
-            console.log('Audio play attempt, waiting for interaction...');
-        });
-    }
-    
-    // Only use click/touch/keydown — browsers trust these as real interactions
-    document.addEventListener('click', autoPlayOnInteraction);
-    document.addEventListener('touchstart', autoPlayOnInteraction);
-    document.addEventListener('keydown', autoPlayOnInteraction);
-    
-    // Manual Play/Pause toggle
+    // Manual Play/Pause toggle (ENTER button on loading screen handles auto-start)
     toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent double-trigger with autoplay listener
         if (audio.paused) {
             startPlaying();
         } else {
