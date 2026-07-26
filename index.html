@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>War Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .status {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 War Project</h1>
+        <p>Selamat datang di project War! Website ini sudah online dan bisa diakses secara public.</p>
+        <button class="btn" onclick="showMessage()">Klik Saya!</button>
+        <div class="status">
+            <strong>Status:</strong> ✅ Online dan Public<br>
+            <strong>Hosting:</strong> GitHub Pages
+        </div>
+    </div>
+    
+    <script>
+        function showMessage() {
+            alert('Halo! Website Anda sudah berhasil online 🎉');
+        }
+        
+        // Tambahkan waktu akses
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date().toLocaleString('id-ID');
+            const statusDiv = document.querySelector('.status');
+            statusDiv.innerHTML += '<br><strong>Diakses pada:</strong> ' + now;
+        });
+    </script>
+</body>
+</html>
