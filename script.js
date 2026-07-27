@@ -215,6 +215,9 @@ function init() {
     initFilterTabs();
     initDomainExpansion();
     initParticleSystem();
+    if (typeof initPdfModal === 'function') initPdfModal();
+    if (typeof initCompetitionGallery === 'function') initCompetitionGallery();
+    if (typeof initBootcampModal === 'function') initBootcampModal();
     
     console.log('✅ Portfolio Ready!');
 }
@@ -1008,19 +1011,18 @@ function initBootcampModal() {
 
     if (!modal || !img) return;
 
-    // Get the bootcamp card
-    const bootcampCard = document.querySelector('[data-bootcamp="dokumentasi"]');
+    // Get all bootcamp cards
+    const bootcampCards = document.querySelectorAll('[data-bootcamp], .bootcamp-card');
 
-    if (bootcampCard) {
-        bootcampCard.addEventListener('click', (e) => {
+    bootcampCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
             e.preventDefault();
-            bootcampCard.style.cursor = 'pointer';
             img.src = 'Bootcamp.jpeg';
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
-        bootcampCard.style.cursor = 'pointer';
-    }
+    });
 
     function closeBootcampModal() {
         modal.classList.remove('active');
@@ -1042,16 +1044,19 @@ function initBootcampModal() {
     });
 }
 
-// Add to init
-const originalInitRef = init;
-const pdfModalInit = initPdfModal;
-window.addEventListener('DOMContentLoaded', () => {
-    initMusicPlayer();
-    initCursorFlash();
-    initPdfModal();
-    initCompetitionGallery();
-    initBootcampModal();
-});
+function runSecondaryInits() {
+    if (typeof initMusicPlayer === 'function') initMusicPlayer();
+    if (typeof initCursorFlash === 'function') initCursorFlash();
+    if (typeof initPdfModal === 'function') initPdfModal();
+    if (typeof initCompetitionGallery === 'function') initCompetitionGallery();
+    if (typeof initBootcampModal === 'function') initBootcampModal();
+}
+
+if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', runSecondaryInits);
+} else {
+    runSecondaryInits();
+}
 
 // ===================================
 // CURSOR BLACK FLASH EFFECT (Yuji)
