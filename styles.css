@@ -866,8 +866,8 @@ ul {
 }
 
 .credential-card[data-bootcamp] {
-    border-color: rgba(220, 20, 60, 0.2);
-    background: rgba(220, 20, 60, 0.03);
+    border-color: rgba(69, 176, 210, 0.2);
+    background: rgba(69, 176, 210, 0.03);
     position: relative;
     cursor: pointer;
 }
@@ -878,7 +878,7 @@ ul {
     bottom: 0.5rem;
     right: 0.75rem;
     font-size: 0.65rem;
-    color: #dc143c;
+    color: #45b0d2;
     opacity: 0;
     transition: opacity 0.3s ease;
     letter-spacing: 0.5px;
@@ -889,32 +889,33 @@ ul {
 }
 
 .credential-card[data-bootcamp]:hover {
-    border-color: rgba(220, 20, 60, 0.5);
-    box-shadow: 0 10px 40px rgba(220, 20, 60, 0.2);
+    border-color: rgba(69, 176, 210, 0.5);
+    box-shadow: 0 10px 40px rgba(69, 176, 210, 0.2);
 }
 
 .credential-badge.credential-badge-idn {
     font-size: initial;
     filter: none;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: block !important;
+    text-align: center !important;
     width: 100% !important;
-    height: 3.5rem;
+    height: auto !important;
     margin: 0 auto var(--spacing-sm) auto !important;
+    padding: 0 !important;
 }
 
 .credential-badge.credential-badge-idn .badge-idn-logo {
-    height: 48px;
-    width: auto;
-    display: block !important;
+    height: 54px !important;
+    width: auto !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
     margin: 0 auto !important;
-    filter: drop-shadow(0 0 12px rgba(220, 20, 60, 0.7));
+    filter: brightness(1.2) drop-shadow(0 0 12px rgba(69, 176, 210, 0.8)) !important;
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .credential-card[data-bootcamp]:hover .badge-idn-logo {
-    filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.95));
+    filter: brightness(1.5) drop-shadow(0 0 20px rgba(69, 176, 210, 1)) !important;
     transform: scale(1.08);
 }
 
