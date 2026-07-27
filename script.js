@@ -845,6 +845,158 @@ function initPdfModal() {
     });
 }
 
+// ===================================
+// COMPETITION GALLERY MODAL
+// ===================================
+function initCompetitionGallery() {
+    const modal = document.getElementById('competition-modal');
+    const closeBtn = document.getElementById('competition-modal-close');
+    const overlay = modal ? modal.querySelector('.competition-modal-overlay') : null;
+    const galleryImg = document.getElementById('gallery-img');
+    const galleryPdf = document.getElementById('gallery-pdf');
+    const counter = document.getElementById('gallery-counter');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    const thumbnails = document.getElementById('gallery-thumbnails');
+    const downloadLink = document.getElementById('competition-download-link');
+
+    if (!modal || !galleryImg || !galleryPdf) return;
+
+    // Gallery items: images + certificate PDF
+    const items = [
+        { type: 'image', src: 'WhatsApp Image 2026-07-28 at 02.09.38.jpeg', label: 'Pengumuman Finalis' },
+        { type: 'image', src: 'WhatsApp Image 2026-07-28 at 02.38.00.jpeg', label: 'Group Photo 1' },
+        { type: 'image', src: 'WhatsApp Image 2026-07-28 at 02.39.01.jpeg', label: 'Group Photo 2' },
+        { type: 'image', src: 'WhatsApp Image 2026-07-28 at 02.39.02.jpeg', label: 'Dokumentasi' },
+        { type: 'pdf', src: 'Muhammad Ifannudin Azi.pdf', label: 'Sertifikat Finalis', download:'Muhammad Ifannudin Azi.pdf' }
+    ];
+
+    let currentIndex = 0;
+
+    // Get the credential card
+    const combatCard = document.querySelector('[data-competition="cyber-combat"]');
+
+    if (combatCard) {
+        combatCard.addEventListener('click', (e) => {
+            e.preventDefault();
+            combatCard.style.cursor = 'pointer';
+            openGallery();
+        });
+        combatCard.style.cursor = 'pointer';
+    }
+
+    function openGallery() {
+        currentIndex = 0;
+        showItem(currentIndex);
+        buildThumbnails();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Trigger domain expansion effect
+        if (typeof triggerDomainExpansion === 'function') {
+            triggerDomainExpansion();
+        }
+    }
+
+    function closeGallery() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            galleryPdf.src = '';
+        }, 300);
+    }
+
+    function showItem(index) {
+        const item = items[index];
+        if (!item) return;
+
+        // Hide both first
+        galleryImg.style.display = 'none';
+        galleryPdf.style.display = 'none';
+
+        if (item.type === 'image') {
+            galleryImg.src = item.src;
+            galleryImg.style.display = 'block';
+            if (downloadLink) downloadLink.style.display = 'none';
+        } else if (item.type === 'pdf') {
+            const encodedPath = item.src.split('/').map(s => encodeURIComponent(s)).join('/');
+            galleryPdf.src = encodedPath;
+            galleryPdf.style.display = 'block';
+            if (downloadLink) {
+                downloadLink.href = item.download ? item.download.split('/').map(s => encodeURIComponent(s)).join('/') : encodedPath;
+                downloadLink.style.display = 'inline-flex';
+            }
+        }
+
+        // Update counter
+        if (counter) {
+            counter.textContent = `${index + 1}/${items.length}`;
+        }
+
+        // Update active thumbnail
+        const thumbs = thumbnails.querySelectorAll('.gallery-thumb');
+        thumbs.forEach((t, i) => {
+            t.classList.toggle('active', i === index);
+        });
+    }
+
+    function nextItem() {
+        currentIndex = (currentIndex + 1) % items.length;
+        showItem(currentIndex);
+    }
+
+    function prevItem() {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        showItem(currentIndex);
+    }
+
+    function buildThumbnails() {
+        thumbnails.innerHTML = '';
+        items.forEach((item, i) => {
+            const thumb = document.createElement('div');
+            thumb.className = `gallery-thumb${i === 0 ? ' active' : ''}${item.type === 'pdf' ? ' gallery-thumb-pdf' : ''}`;
+
+            if (item.type === 'image') {
+                const img = document.createElement('img');
+                img.src = item.src;
+                img.alt = item.label;
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                img.style.borderRadius = '6px';
+                thumb.appendChild(img);
+            } else {
+                thumb.textContent = '📄';
+            }
+
+            thumb.addEventListener('click', () => {
+                currentIndex = i;
+                showItem(currentIndex);
+            });
+
+            thumbnails.appendChild(thumb);
+        });
+    }
+
+    // Navigation
+    if (prevBtn) prevBtn.addEventListener('click', prevItem);
+    if (nextBtn) nextBtn.addEventListener('click', nextItem);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('active')) return;
+        if (e.key === 'Escape') closeGallery();
+        if (e.key === 'ArrowRight') nextItem();
+        if (e.key === 'ArrowLeft') prevItem();
+    });
+
+    // Close button
+    if (closeBtn) closeBtn.addEventListener('click', closeGallery);
+
+    // Close on overlay click
+    if (overlay) overlay.addEventListener('click', closeGallery);
+}
+
 // Add to init
 const originalInitRef = init;
 const pdfModalInit = initPdfModal;
@@ -852,6 +1004,7 @@ window.addEventListener('DOMContentLoaded', () => {
     initMusicPlayer();
     initCursorFlash();
     initPdfModal();
+    initCompetitionGallery();
 });
 
 // ===================================

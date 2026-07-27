@@ -60,6 +60,32 @@
         </div>
     </div>
 
+    <!-- Competition Gallery Modal -->
+    <div id="competition-modal" class="competition-modal">
+        <div class="competition-modal-overlay"></div>
+        <div class="competition-modal-container">
+            <div class="competition-modal-header">
+                <span class="competition-modal-title">⚔️ 領域展開 - Cyber Combat 2026</span>
+                <button class="competition-modal-close" id="competition-modal-close">✕</button>
+            </div>
+            <div class="competition-modal-body">
+                <div class="gallery-viewport">
+                    <div class="gallery-slide" id="gallery-slide">
+                        <img id="gallery-img" class="gallery-img" src="" alt="Competition Documentation">
+                        <iframe id="gallery-pdf" class="gallery-pdf" src=""></iframe>
+                    </div>
+                    <button class="gallery-nav gallery-prev" id="gallery-prev">‹</button>
+                    <button class="gallery-nav gallery-next" id="gallery-next">›</button>
+                    <div class="gallery-counter" id="gallery-counter">1/5</div>
+                </div>
+                <div class="gallery-thumbnails" id="gallery-thumbnails"></div>
+            </div>
+            <div class="competition-modal-footer">
+                <a id="competition-download-link" class="btn btn-primary" href="#" target="_blank" download>📥 Download Sertifikat</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Background Music Player -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/audio/bgm.mp3" type="audio/mpeg">
@@ -215,6 +241,12 @@
                     <button class="filter-btn" data-filter="bootcamp">Bootcamp</button>
                 </div>
                 <div class="credentials-grid">
+                    <div class="credential-card animate-on-scroll competition-card" data-category="competition" data-competition="cyber-combat">
+                        <div class="credential-badge">🏆</div>
+                        <h3 class="credential-title">Finalis Cyber Combat 2026</h3>
+                        <p class="credential-org">Cyber Combat Competition</p>
+                        <p class="credential-date">2026</p>
+                    </div>
                     <div class="credential-card animate-on-scroll" data-category="competition">
                         <div class="credential-badge">🏆</div>
                         <h3 class="credential-title">Winner - CTF Competition 2025</h3>
