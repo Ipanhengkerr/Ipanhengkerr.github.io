@@ -784,7 +784,62 @@ function initMusicPlayer() {
 const originalInit = init;
 window.addEventListener('DOMContentLoaded', () => {
     initMusicPlayer();
+    initCursorFlash();
 });
+
+// ===================================
+// CURSOR BLACK FLASH EFFECT (Yuji)
+// ===================================
+function initCursorFlash() {
+    let lastX = 0, lastY = 0;
+    let throttle = false;
+    
+    document.addEventListener('mousemove', (e) => {
+        if (throttle) return;
+        throttle = true;
+        
+        // Only create spark if cursor moved enough
+        const dx = e.clientX - lastX;
+        const dy = e.clientY - lastY;
+        const speed = Math.sqrt(dx * dx + dy * dy);
+        
+        if (speed > 8) {
+            createFlashSpark(e.clientX, e.clientY, speed);
+        }
+        
+        lastX = e.clientX;
+        lastY = e.clientY;
+        
+        setTimeout(() => { throttle = false; }, 40);
+    });
+}
+
+function createFlashSpark(x, y, speed) {
+    const spark = document.createElement('div');
+    spark.className = 'cursor-flash';
+    
+    // Random offset for natural feel
+    const offsetX = (Math.random() - 0.5) * 12;
+    const offsetY = (Math.random() - 0.5) * 12;
+    const size = Math.min(4 + speed * 0.08, 10);
+    
+    spark.style.cssText = `
+        position: fixed;
+        left: ${x + offsetX}px;
+        top: ${y + offsetY}px;
+        width: ${size}px;
+        height: ${size}px;
+        pointer-events: none;
+        z-index: 99999;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(220, 20, 60, 0.8), rgba(255, 80, 50, 0.4), transparent);
+        box-shadow: 0 0 ${size * 2}px rgba(220, 20, 60, 0.5), 0 0 ${size * 4}px rgba(255, 50, 30, 0.2);
+        animation: flashFade 0.5s ease-out forwards;
+    `;
+    
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 500);
+}
 
 console.log('⚡ Portfolio System Active');
 console.log('🔮 Interactive Features Ready');
