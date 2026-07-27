@@ -997,6 +997,51 @@ function initCompetitionGallery() {
     if (overlay) overlay.addEventListener('click', closeGallery);
 }
 
+// ===================================
+// BOOTCAMP MODAL
+// ===================================
+function initBootcampModal() {
+    const modal = document.getElementById('bootcamp-modal');
+    const closeBtn = document.getElementById('bootcamp-modal-close');
+    const overlay = modal ? modal.querySelector('.bootcamp-modal-overlay') : null;
+    const img = document.getElementById('bootcamp-img');
+
+    if (!modal || !img) return;
+
+    // Get the bootcamp card
+    const bootcampCard = document.querySelector('[data-bootcamp="dokumentasi"]');
+
+    if (bootcampCard) {
+        bootcampCard.addEventListener('click', (e) => {
+            e.preventDefault();
+            bootcampCard.style.cursor = 'pointer';
+            img.src = '1780331373272.jpeg';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        bootcampCard.style.cursor = 'pointer';
+    }
+
+    function closeBootcampModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => { img.src = ''; }, 300);
+    }
+
+    // Close button
+    if (closeBtn) closeBtn.addEventListener('click', closeBootcampModal);
+
+    // Close on overlay click
+    if (overlay) overlay.addEventListener('click', closeBootcampModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeBootcampModal();
+        }
+    });
+}
+
 // Add to init
 const originalInitRef = init;
 const pdfModalInit = initPdfModal;
@@ -1005,6 +1050,7 @@ window.addEventListener('DOMContentLoaded', () => {
     initCursorFlash();
     initPdfModal();
     initCompetitionGallery();
+    initBootcampModal();
 });
 
 // ===================================
