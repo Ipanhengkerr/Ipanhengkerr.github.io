@@ -142,7 +142,7 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
+    z-index: -1;
     opacity: 0.6;
 }
 
@@ -1296,18 +1296,19 @@ ul {
 }
 
 /* ===================================
-   CHARACTER OVERLAY - SMOOTH IMAGE BG
+   CHARACTER OVERLAY - SIDE DISPLAY
    =================================== */
 .character-overlay {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 55%;
     height: 100%;
-    z-index: -1;
+    z-index: 1;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
 .character-overlay.active {
@@ -1319,12 +1320,14 @@ ul {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
-    opacity: 0.5;
+    opacity: 0.45;
     transform: scale(1.05);
     animation: characterZoomIn 4s ease-out forwards;
     transition: opacity 0.8s ease;
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,1) 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,1) 100%);
 }
 
 /* Smooth zoom-in Ken Burns effect */
@@ -1558,9 +1561,18 @@ ul {
 
 /* Mobile optimization */
 @media (max-width: 768px) {
+    .character-overlay {
+        width: 100%;
+        top: auto;
+        bottom: 0;
+        height: 50%;
+    }
+    
     .character-image {
         background-size: cover;
-        opacity: 0.35;
+        opacity: 0.25;
+        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.8) 100%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.8) 100%);
     }
     
     @keyframes characterZoomIn {
@@ -1570,11 +1582,11 @@ ul {
             filter: blur(5px) brightness(0.4);
         }
         30% {
-            opacity: 0.35;
+            opacity: 0.25;
             filter: blur(1px) brightness(0.5);
         }
         100% {
-            opacity: 0.35;
+            opacity: 0.25;
             transform: scale(1);
             filter: blur(0px) brightness(0.5);
         }
