@@ -297,6 +297,17 @@ ul {
     letter-spacing: 2px;
 }
 
+.nav-logo-img {
+    height: 45px;
+    width: auto;
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(69, 176, 210, 0.6));
+    transition: filter 0.3s ease;
+}
+
+.nav-logo-img:hover {
+    filter: brightness(1.4) drop-shadow(0 0 12px rgba(69, 176, 210, 0.9));
+}
+
 .nav-menu {
     display: flex;
     gap: var(--spacing-md);
