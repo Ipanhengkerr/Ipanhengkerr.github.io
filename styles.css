@@ -871,25 +871,6 @@ ul {
     filter: drop-shadow(0 0 10px rgba(86, 74, 148, 0.5));
 }
 
-.credential-badge-idn {
-    filter: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.badge-idn-logo {
-    height: 75px;
-    width: auto;
-    filter: brightness(1.3) drop-shadow(0 0 12px rgba(69, 176, 210, 0.7));
-    transition: filter 0.3s ease;
-}
-
-.badge-idn-logo:hover {
-    filter: brightness(1.6) drop-shadow(0 0 16px rgba(69, 176, 210, 0.9));
-}
-
 .credential-title {
     font-size: 1.2rem;
     font-weight: 700;
