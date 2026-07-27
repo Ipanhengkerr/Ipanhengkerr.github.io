@@ -1015,7 +1015,7 @@ function initBootcampModal() {
         bootcampCard.addEventListener('click', (e) => {
             e.preventDefault();
             bootcampCard.style.cursor = 'pointer';
-            img.src = '1780331373272.jpeg';
+            img.src = 'bootcamp.jpeg';
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
