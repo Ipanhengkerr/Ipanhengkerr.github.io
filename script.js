@@ -780,11 +780,78 @@ function initMusicPlayer() {
     console.log('🎵 Music Player Ready (auto-play on first interaction)');
 }
 
-// Add music player to init
-const originalInit = init;
+// ===================================
+// PDF MODAL VIEWER
+// ===================================
+function initPdfModal() {
+    const modal = document.getElementById('pdf-modal');
+    const closeBtn = document.getElementById('pdf-modal-close');
+    const frame = document.getElementById('pdf-frame');
+    const downloadLink = document.getElementById('pdf-download-link');
+    const overlay = modal ? modal.querySelector('.pdf-modal-overlay') : null;
+
+    if (!modal || !closeBtn || !frame) return;
+
+    // Get the research card
+    const researchCard = document.querySelector('.project-card[data-category="research"]');
+
+    if (researchCard) {
+        researchCard.addEventListener('click', () => {
+            openPdfModal();
+        });
+    }
+
+    function openPdfModal() {
+        // Encode the PDF filename for URL
+        const pdfPath = 'Jurnal Analisis AES di WhatsApp pada Wifi Publik (Muhammad Ifannudin Azi).pdf';
+        const encodedPath = pdfPath.split('/').map(segment => encodeURIComponent(segment)).join('/');
+
+        // Set the iframe src
+        frame.src = encodedPath;
+        if (downloadLink) {
+            downloadLink.href = encodedPath;
+        }
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Trigger domain expansion effect
+        triggerDomainExpansion();
+    }
+
+    function closePdfModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+
+        // Clear the iframe src to stop any loading
+        setTimeout(() => {
+            frame.src = '';
+        }, 300);
+    }
+
+    // Close button
+    closeBtn.addEventListener('click', closePdfModal);
+
+    // Close on overlay click
+    if (overlay) {
+        overlay.addEventListener('click', closePdfModal);
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closePdfModal();
+        }
+    });
+}
+
+// Add to init
+const originalInitRef = init;
+const pdfModalInit = initPdfModal;
 window.addEventListener('DOMContentLoaded', () => {
     initMusicPlayer();
     initCursorFlash();
+    initPdfModal();
 });
 
 // ===================================

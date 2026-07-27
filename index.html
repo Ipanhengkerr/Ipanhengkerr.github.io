@@ -43,6 +43,23 @@
         </div>
     </div>
 
+    <!-- PDF Viewer Modal -->
+    <div id="pdf-modal" class="pdf-modal">
+        <div class="pdf-modal-overlay"></div>
+        <div class="pdf-modal-container">
+            <div class="pdf-modal-header">
+                <span class="pdf-modal-title">呪術研究 - Jurnal Analisis AES</span>
+                <button class="pdf-modal-close" id="pdf-modal-close">✕</button>
+            </div>
+            <div class="pdf-modal-body">
+                <iframe id="pdf-frame" class="pdf-frame"></iframe>
+            </div>
+            <div class="pdf-modal-footer">
+                <a id="pdf-download-link" class="btn btn-primary" href="#" target="_blank" download>📥 Download PDF</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Background Music Player -->
     <audio id="bg-music" loop preload="auto">
         <source src="assets/audio/bgm.mp3" type="audio/mpeg">
@@ -232,8 +249,24 @@
                     <button class="filter-btn" data-filter="web">Web App</button>
                     <button class="filter-btn" data-filter="mobile">Mobile</button>
                     <button class="filter-btn" data-filter="tool">Tool</button>
+                    <button class="filter-btn" data-filter="research">Research</button>
                 </div>
                 <div class="projects-grid">
+                    <div class="project-card animate-on-scroll research-card" data-category="research">
+                        <div class="project-image">
+                            <div class="project-placeholder">📄</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Analisis AES pada WhatsApp di Wifi Publik</h3>
+                            <p class="project-description">Jurnal penelitian tentang analisis keamanan enkripsi AES-256 pada WhatsApp saat terhubung ke jaringan WiFi publik, termasuk potensi serangan packet sniffing, MITM, dan ARP spoofing.</p>
+                            <div class="project-tags">
+                                <span class="tag">AES</span>
+                                <span class="tag">WhatsApp</span>
+                                <span class="tag">Network Security</span>
+                                <span class="tag">Research</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="project-card animate-on-scroll" data-category="web" data-domain-trigger>
                         <div class="project-image">
                             <div class="project-placeholder">🛡️</div>

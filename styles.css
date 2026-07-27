@@ -1667,6 +1667,190 @@ ul {
 }
 
 /* ===================================
+   PDF MODAL
+   =================================== */
+.pdf-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-modal.active {
+    display: flex;
+}
+
+.pdf-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 14, 26, 0.92);
+    backdrop-filter: blur(20px);
+    animation: overlayFadeIn 0.4s ease-out;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.pdf-modal-container {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    height: 85vh;
+    background: rgba(15, 20, 25, 0.95);
+    border: 1px solid rgba(69, 176, 210, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 80px rgba(69, 176, 210, 0.15),
+                0 0 200px rgba(86, 74, 148, 0.1),
+                inset 0 0 60px rgba(69, 176, 210, 0.05);
+    z-index: 1;
+    animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.pdf-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(10, 14, 26, 0.9);
+    border-bottom: 1px solid rgba(69, 176, 210, 0.2);
+}
+
+.pdf-modal-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-primary);
+    text-shadow: 0 0 20px rgba(69, 176, 210, 0.4);
+    letter-spacing: 1px;
+    font-size: 1rem;
+}
+
+.pdf-modal-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(220, 20, 60, 0.4);
+    background: rgba(220, 20, 60, 0.1);
+    color: var(--color-sukuna-red);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.pdf-modal-close:hover {
+    background: rgba(220, 20, 60, 0.2);
+    border-color: var(--color-sukuna-red);
+    box-shadow: 0 0 20px rgba(220, 20, 60, 0.4);
+    transform: scale(1.1);
+}
+
+.pdf-modal-body {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.pdf-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+}
+
+.pdf-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.75rem 1.5rem;
+    background: rgba(10, 14, 26, 0.9);
+    border-top: 1px solid rgba(69, 176, 210, 0.2);
+}
+
+.pdf-modal-footer .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* Research card special styling */
+.project-card[data-category="research"] {
+    border-color: rgba(0, 206, 209, 0.3);
+    background: rgba(15, 20, 25, 0.7);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card[data-category="research"]::before {
+    content: '研究';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(0, 206, 209, 0.06);
+    pointer-events: none;
+    line-height: 1;
+}
+
+.project-card[data-category="research"]:hover {
+    border-color: var(--color-cursed-teal);
+    box-shadow: 0 15px 40px rgba(0, 206, 209, 0.3);
+}
+
+.project-card[data-category="research"] .project-placeholder {
+    filter: drop-shadow(0 0 20px rgba(0, 206, 209, 0.5));
+}
+
+.project-card[data-category="research"] .tag {
+    background: rgba(0, 206, 209, 0.15);
+    color: var(--color-cursed-teal);
+    border-color: rgba(0, 206, 209, 0.3);
+}
+
+/* Mobile adjustments for modal */
+@media (max-width: 768px) {
+    .pdf-modal-container {
+        width: 100%;
+        height: 100vh;
+        max-width: 100%;
+        border-radius: 0;
+        border: none;
+    }
+
+    .pdf-modal-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .pdf-modal-footer {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* ===================================
    ANIMATIONS
    =================================== */
 .animate-on-scroll {
@@ -1693,6 +1877,7 @@ ul {
 .projects-grid .animate-on-scroll:nth-child(1) { transition-delay: 0.1s; }
 .projects-grid .animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
 .projects-grid .animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+.projects-grid .animate-on-scroll:nth-child(4) { transition-delay: 0.4s; }
 
 /* ===================================
    RESPONSIVE DESIGN
