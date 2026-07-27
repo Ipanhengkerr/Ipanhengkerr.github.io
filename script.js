@@ -311,15 +311,15 @@ function initScrollAnimations() {
 // DEPTH TRACKING + CHARACTER BACKGROUNDS
 // ===================================
 
-// Map each section depth to a JJK character
+// Map each section depth to a JJK character + side position
 const sectionCharacters = {
-    '0': 'gojo',
-    '200': 'megumi',
-    '500': 'sukuna',
-    '1000': 'nobara',
-    '2000': 'yuji',
-    '2500': 'nanami',
-    '3000': 'gojo'
+    '0':    { id: 'gojo',   side: 'right' },
+    '200':  { id: 'megumi', side: 'left' },
+    '500':  { id: 'sukuna', side: 'right' },
+    '1000': { id: 'nobara', side: 'left' },
+    '2000': { id: 'yuji',   side: 'right' },
+    '2500': { id: 'nanami', side: 'left' },
+    '3000': { id: 'gojo',   side: 'right' }
 };
 
 let currentCharacter = '';
@@ -332,10 +332,10 @@ function initDepthTracking() {
                 updateDepth(depth);
                 
                 // Update background character for this section
-                const charId = sectionCharacters[depth];
-                if (charId && charId !== currentCharacter) {
-                    currentCharacter = charId;
-                    showCharacterBackground(charId);
+                const charData = sectionCharacters[depth];
+                if (charData && charData.id !== currentCharacter) {
+                    currentCharacter = charData.id;
+                    showCharacterBackground(charData.id, charData.side);
                 }
             }
         });
@@ -347,10 +347,10 @@ function initDepthTracking() {
         }
     });
     
-    // Show initial character (Gojo for hero)
+    // Show initial character (Gojo on right for hero)
     setTimeout(() => {
         currentCharacter = 'gojo';
-        showCharacterBackground('gojo');
+        showCharacterBackground('gojo', 'right');
     }, 1500);
 }
 
@@ -497,23 +497,25 @@ function showRandomQuote() {
 // ===================================
 // CHARACTER BACKGROUND DISPLAY
 // ===================================
-function showCharacterBackground(characterId) {
+function showCharacterBackground(characterId, side) {
     if (!elements.characterOverlay) return;
     
     const theme = characterThemes[characterId];
     if (!theme) return;
     
     const characterImage = elements.characterOverlay.querySelector('.character-image');
+    side = side || 'right';
     
     // Smooth transition: fade out, swap character, fade in
     elements.characterOverlay.classList.remove('active');
     
     setTimeout(() => {
-        // Remove all character classes
+        // Remove all character and side classes
         elements.characterOverlay.className = 'character-overlay';
         
-        // Add character-specific class
+        // Add character-specific class + side position
         elements.characterOverlay.classList.add(characterId);
+        elements.characterOverlay.classList.add('char-' + side);
         
         // Apply actual character image as background
         if (characterImage) {

@@ -1296,23 +1296,38 @@ ul {
 }
 
 /* ===================================
-   CHARACTER OVERLAY - SIDE DISPLAY
+   CHARACTER OVERLAY - ALTERNATING SIDES
    =================================== */
 .character-overlay {
     position: fixed;
     top: 0;
     right: 0;
+    left: auto;
     width: 55%;
     height: 100%;
     z-index: 1;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
+                left 0s linear 0.5s, 
+                right 0s linear 0.5s;
     overflow: hidden;
 }
 
 .character-overlay.active {
     opacity: 1;
+}
+
+/* Right side (default) */
+.character-overlay.char-right {
+    right: 0;
+    left: auto;
+}
+
+/* Left side */
+.character-overlay.char-left {
+    left: 0;
+    right: auto;
 }
 
 .character-image {
@@ -1328,6 +1343,12 @@ ul {
     transition: opacity 0.8s ease;
     mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,1) 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,1) 100%);
+}
+
+/* Flip gradient mask for left side */
+.character-overlay.char-left .character-image {
+    mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,1) 100%);
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,1) 100%);
 }
 
 /* Smooth zoom-in Ken Burns effect */
