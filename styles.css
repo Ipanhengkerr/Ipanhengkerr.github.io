@@ -1585,16 +1585,7 @@ ul {
    QUOTE DISPLAY
    =================================== */
 .quote-display {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    max-width: 600px;
-    width: 90%;
-    z-index: 10000;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none !important;
 }
 
 .quote-display.active {

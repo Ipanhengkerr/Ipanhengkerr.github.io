@@ -299,10 +299,6 @@ function initScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animated');
-                // Trigger quote on section entry (randomly)
-                if (entry.target.classList.contains('section-title') && Math.random() > 0.6) {
-                    showRandomQuote();
-                }
             }
         });
     }, observerOptions);
@@ -311,23 +307,51 @@ function initScrollAnimations() {
 }
 
 // ===================================
-// DEPTH TRACKING
 // ===================================
+// DEPTH TRACKING + CHARACTER BACKGROUNDS
+// ===================================
+
+// Map each section depth to a JJK character
+const sectionCharacters = {
+    '0': 'gojo',
+    '200': 'megumi',
+    '500': 'sukuna',
+    '1000': 'nobara',
+    '2000': 'yuji',
+    '2500': 'nanami',
+    '3000': 'gojo'
+};
+
+let currentCharacter = '';
+
 function initDepthTracking() {
     const depthObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const depth = entry.target.getAttribute('data-depth');
                 updateDepth(depth);
+                
+                // Update background character for this section
+                const charId = sectionCharacters[depth];
+                if (charId && charId !== currentCharacter) {
+                    currentCharacter = charId;
+                    showCharacterBackground(charId);
+                }
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
     
     elements.sections.forEach(section => {
         if (section.hasAttribute('data-depth')) {
             depthObserver.observe(section);
         }
     });
+    
+    // Show initial character (Gojo for hero)
+    setTimeout(() => {
+        currentCharacter = 'gojo';
+        showCharacterBackground('gojo');
+    }, 1500);
 }
 
 function updateDepth(depth) {
@@ -420,11 +444,6 @@ function triggerDomainExpansion() {
     // Activate domain expansion
     elements.domainExpansion.classList.add('active');
     
-    // Show quote during expansion
-    setTimeout(() => {
-        showRandomQuote();
-    }, 400);
-    
     // Deactivate after animation
     setTimeout(() => {
         elements.domainExpansion.classList.remove('active');
@@ -486,64 +505,66 @@ function showCharacterBackground(characterId) {
     
     const characterImage = elements.characterOverlay.querySelector('.character-image');
     
-    // Remove all character classes
-    elements.characterOverlay.className = 'character-overlay';
+    // Smooth transition: fade out, swap character, fade in
+    elements.characterOverlay.classList.remove('active');
     
-    // Add character-specific class
-    elements.characterOverlay.classList.add(characterId);
-    
-    // Apply actual character image as background
-    if (characterImage) {
-        if (theme.cssOnly) {
-            // CSS-only mode for Nanami — golden ratio geometric lines
-            characterImage.style.background = theme.gradient;
-            characterImage.innerHTML = `
-            <div class="nanami-geo-container">
-                <div class="nanami-line nanami-line-1"></div>
-                <div class="nanami-line nanami-line-2"></div>
-                <div class="nanami-line nanami-line-3"></div>
-                <div class="nanami-line nanami-line-4"></div>
-                <div class="nanami-line nanami-line-5"></div>
-                <div class="nanami-line nanami-line-6"></div>
-                <div class="nanami-ratio">7 : 3</div>
-                <div class="nanami-circle nanami-circle-1"></div>
-                <div class="nanami-circle nanami-circle-2"></div>
-            </div>
-            <div style="
-                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                background: radial-gradient(ellipse at center, transparent 20%, rgba(10, 14, 26, 0.9) 100%);
-                pointer-events: none;
-            "></div>`;
-        } else {
-            // Image mode for other characters
-            const img = new Image();
-            img.src = theme.image;
-            
-            characterImage.style.backgroundImage = `${theme.gradient}, url('${theme.image}')`;
-            characterImage.style.backgroundSize = 'cover';
-            characterImage.style.backgroundPosition = 'center';
-            characterImage.style.backgroundRepeat = 'no-repeat';
-            
-            characterImage.innerHTML = `<div style="
-                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                background: radial-gradient(ellipse at center, transparent 30%, rgba(10, 14, 26, 0.85) 100%);
-                pointer-events: none;
-            "></div>
-            <div style="
-                position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
-                background: linear-gradient(to top, rgba(10, 14, 26, 1) 0%, transparent 100%);
-                pointer-events: none;
-            "></div>
-            <div style="
-                position: absolute; top: 0; left: 0; width: 100%; height: 30%;
-                background: linear-gradient(to bottom, rgba(10, 14, 26, 0.8) 0%, transparent 100%);
-                pointer-events: none;
-            "></div>`;
+    setTimeout(() => {
+        // Remove all character classes
+        elements.characterOverlay.className = 'character-overlay';
+        
+        // Add character-specific class
+        elements.characterOverlay.classList.add(characterId);
+        
+        // Apply actual character image as background
+        if (characterImage) {
+            if (theme.cssOnly) {
+                characterImage.style.backgroundImage = '';
+                characterImage.style.background = theme.gradient;
+                characterImage.innerHTML = `
+                <div class="nanami-geo-container">
+                    <div class="nanami-line nanami-line-1"></div>
+                    <div class="nanami-line nanami-line-2"></div>
+                    <div class="nanami-line nanami-line-3"></div>
+                    <div class="nanami-line nanami-line-4"></div>
+                    <div class="nanami-line nanami-line-5"></div>
+                    <div class="nanami-line nanami-line-6"></div>
+                    <div class="nanami-ratio">7 : 3</div>
+                    <div class="nanami-circle nanami-circle-1"></div>
+                    <div class="nanami-circle nanami-circle-2"></div>
+                </div>
+                <div style="
+                    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                    background: radial-gradient(ellipse at center, transparent 20%, rgba(10, 14, 26, 0.9) 100%);
+                    pointer-events: none;
+                "></div>`;
+            } else {
+                characterImage.style.background = '';
+                characterImage.style.backgroundImage = `${theme.gradient}, url('${theme.image}')`;
+                characterImage.style.backgroundSize = 'cover';
+                characterImage.style.backgroundPosition = 'center';
+                characterImage.style.backgroundRepeat = 'no-repeat';
+                
+                characterImage.innerHTML = `<div style="
+                    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                    background: radial-gradient(ellipse at center, transparent 30%, rgba(10, 14, 26, 0.85) 100%);
+                    pointer-events: none;
+                "></div>
+                <div style="
+                    position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
+                    background: linear-gradient(to top, rgba(10, 14, 26, 1) 0%, transparent 100%);
+                    pointer-events: none;
+                "></div>
+                <div style="
+                    position: absolute; top: 0; left: 0; width: 100%; height: 30%;
+                    background: linear-gradient(to bottom, rgba(10, 14, 26, 0.8) 0%, transparent 100%);
+                    pointer-events: none;
+                "></div>`;
+            }
         }
-    }
-    
-    // Show overlay with smooth animation
-    elements.characterOverlay.classList.add('active');
+        
+        // Fade in new character
+        elements.characterOverlay.classList.add('active');
+    }, 600);
 }
 
 function hideCharacterBackground() {
