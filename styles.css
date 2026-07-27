@@ -873,6 +873,9 @@ ul {
 
 .credential-badge-idn {
     filter: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .badge-idn-logo {
