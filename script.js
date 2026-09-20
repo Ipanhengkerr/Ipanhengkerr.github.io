@@ -867,10 +867,10 @@ function initCompetitionGallery() {
 
     // Gallery items: images + certificate PDF
     const items = [
-        { type: 'image', src: 'WhatsApp Image 2026-07-28 at 02.09.38.jpeg', label: 'Pengumuman Finalis' },
-        { type: 'image', src: 'WhatsApp Image 2026-07-28 at 02.38.00.jpeg', label: 'Group Photo 1' },
-        { type: 'image', src: 'WhatsApp Image 2026-07-28 at 02.39.01.jpeg', label: 'Group Photo 2' },
-        { type: 'image', src: 'WhatsApp Image 2026-07-28 at 02.39.02.jpeg', label: 'Dokumentasi' },
+        { type: 'image', src: 'play-it-2026-competition-1.jpeg', label: 'Pengumuman Finalis' },
+        { type: 'image', src: 'play-it-2026-competition-2.jpeg', label: 'Group Photo 1' },
+        { type: 'image', src: 'play-it-2026-competition-3.jpeg', label: 'Group Photo 2' },
+        { type: 'image', src: 'play-it-2026-competition-4.jpeg', label: 'Dokumentasi' },
         { type: 'pdf', src: 'Muhammad Ifannudin Azi.pdf', label: 'Sertifikat Finalis', download:'Muhammad Ifannudin Azi.pdf' }
     ];
 
