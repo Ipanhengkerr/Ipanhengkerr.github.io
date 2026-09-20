@@ -358,18 +358,19 @@ function initDepthTracking() {
 }
 
 function updateDepth(depth) {
-    if (state.currentDepth !== depth) {
-        state.currentDepth = depth;
-        const depthValue = elements.depthIndicator.querySelector('.depth-value');
-        if (depthValue) {
-            depthValue.textContent = `${depth}m`;
-            // Animate depth change
-            depthValue.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-                depthValue.style.transform = 'scale(1)';
-            }, 300);
-        }
-    }
+    // Disabled for cleaner UI - depth indicator removed
+    // if (state.currentDepth !== depth) {
+    //     state.currentDepth = depth;
+    //     const depthValue = elements.depthIndicator.querySelector('.depth-value');
+    //     if (depthValue) {
+    //         depthValue.textContent = `${depth}m`;
+    //         // Animate depth change
+    //         depthValue.style.transform = 'scale(1.3)';
+    //         setTimeout(() => {
+    //             depthValue.style.transform = 'scale(1)';
+    //         }, 300);
+    //     }
+    // }
 }
 
 

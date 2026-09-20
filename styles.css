@@ -361,12 +361,12 @@ ul {
    DEPTH INDICATOR
    =================================== */
 .depth-indicator {
+    display: none; /* Hidden for cleaner UI */
     position: fixed;
     right: var(--spacing-md);
     top: 50%;
     transform: translateY(-50%);
     z-index: 999;
-    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
