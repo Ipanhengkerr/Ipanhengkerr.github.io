@@ -1089,6 +1089,94 @@ function initJehModal() {
     });
 }
 
+// ===================================
+// JWAP CERTIFICATION MODAL
+// ===================================
+function initJwapModal() {
+    const modal = document.getElementById('jwap-modal');
+    const closeBtn = document.getElementById('jwap-modal-close');
+    const overlay = modal ? modal.querySelector('.bootcamp-modal-overlay') : null;
+    const img = document.getElementById('jwap-img');
+
+    if (!modal || !img) return;
+
+    // Get all JWAP certification cards
+    const jwapCards = document.querySelectorAll('[data-certification="jwap"], .certification-card[data-certification="jwap"]');
+
+    jwapCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            img.src = 'junior-web-app-pentester-sturtle.jpeg';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeJwapModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => { img.src = ''; }, 300);
+    }
+
+    // Close button
+    if (closeBtn) closeBtn.addEventListener('click', closeJwapModal);
+
+    // Close on overlay click
+    if (overlay) overlay.addEventListener('click', closeJwapModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeJwapModal();
+        }
+    });
+}
+
+// ===================================
+// PENETRATION TESTING TRAINING MODAL
+// ===================================
+function initPentestTrainingModal() {
+    const modal = document.getElementById('pentest-training-modal');
+    const closeBtn = document.getElementById('pentest-training-modal-close');
+    const overlay = modal ? modal.querySelector('.pdf-modal-overlay') : null;
+    const pdfFrame = document.getElementById('pentest-training-frame');
+
+    if (!modal || !pdfFrame) return;
+
+    // Get all pentest training bootcamp cards
+    const trainingCards = document.querySelectorAll('[data-bootcamp="pentest-training"]');
+
+    trainingCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            pdfFrame.src = 'penetration-testing-training-6month.pdf';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closePentestModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => { pdfFrame.src = ''; }, 300);
+    }
+
+    // Close button
+    if (closeBtn) closeBtn.addEventListener('click', closePentestModal);
+
+    // Close on overlay click
+    if (overlay) overlay.addEventListener('click', closePentestModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closePentestModal();
+        }
+    });
+}
+
 function runSecondaryInits() {
     if (typeof initMusicPlayer === 'function') initMusicPlayer();
     if (typeof initCursorFlash === 'function') initCursorFlash();
@@ -1096,6 +1184,8 @@ function runSecondaryInits() {
     if (typeof initCompetitionGallery === 'function') initCompetitionGallery();
     if (typeof initBootcampModal === 'function') initBootcampModal();
     if (typeof initJehModal === 'function') initJehModal();
+    if (typeof initJwapModal === 'function') initJwapModal();
+    if (typeof initPentestTrainingModal === 'function') initPentestTrainingModal();
 }
 
 if (document.readyState === 'loading') {
