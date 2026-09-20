@@ -1075,42 +1075,61 @@ function initCursorFlash() {
         const dy = e.clientY - lastY;
         const speed = Math.sqrt(dx * dx + dy * dy);
         
-        if (speed > 8) {
+        // Lowered threshold from 8 to 5 for more visible trail
+        if (speed > 5) {
             createFlashSpark(e.clientX, e.clientY, speed);
         }
         
         lastX = e.clientX;
         lastY = e.clientY;
         
-        setTimeout(() => { throttle = false; }, 40);
+        // Reduced throttle from 40ms to 30ms for smoother trail
+        setTimeout(() => { throttle = false; }, 30);
     });
 }
 
 function createFlashSpark(x, y, speed) {
-    const spark = document.createElement('div');
-    spark.className = 'cursor-flash';
+    // Create multiple layers for stronger effect
+    const layers = [
+        { color: 'rgba(0, 0, 0, 0.7)', blur: 3, size: 1.2 },      // Black core
+        { color: 'rgba(220, 20, 60, 0.95)', blur: 2, size: 1 },   // Red flash
+        { color: 'rgba(255, 80, 50, 0.8)', blur: 4, size: 1.4 },  // Orange glow
+        { color: 'rgba(255, 180, 100, 0.4)', blur: 6, size: 1.8 } // Outer glow
+    ];
     
-    // Random offset for natural feel
-    const offsetX = (Math.random() - 0.5) * 12;
-    const offsetY = (Math.random() - 0.5) * 12;
-    const size = Math.min(4 + speed * 0.08, 10);
-    
-    spark.style.cssText = `
-        position: fixed;
-        left: ${x + offsetX}px;
-        top: ${y + offsetY}px;
-        width: ${size}px;
-        height: ${size}px;
-        pointer-events: none;
-        z-index: 99999;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(220, 20, 60, 0.8), rgba(255, 80, 50, 0.4), transparent);
-        box-shadow: 0 0 ${size * 2}px rgba(220, 20, 60, 0.5), 0 0 ${size * 4}px rgba(255, 50, 30, 0.2);
-        animation: flashFade 0.5s ease-out forwards;
-    `;
-    
-    document.body.appendChild(spark);
-    setTimeout(() => spark.remove(), 500);
+    layers.forEach((layer, index) => {
+        const spark = document.createElement('div');
+        spark.className = 'cursor-flash';
+        
+        // Random offset for natural feel
+        const offsetX = (Math.random() - 0.5) * 15;
+        const offsetY = (Math.random() - 0.5) * 15;
+        const baseSize = Math.min(6 + speed * 0.12, 14);
+        const size = baseSize * layer.size;
+        
+        spark.style.cssText = `
+            position: fixed;
+            left: ${x + offsetX}px;
+            top: ${y + offsetY}px;
+            width: ${size}px;
+            height: ${size}px;
+            pointer-events: none;
+            z-index: ${99999 - index};
+            border-radius: 50%;
+            background: radial-gradient(circle, ${layer.color}, transparent 70%);
+            box-shadow: 
+                0 0 ${size * 2}px ${layer.color},
+                0 0 ${size * 4}px rgba(220, 20, 60, 0.6),
+                0 0 ${size * 6}px rgba(255, 50, 30, 0.3),
+                inset 0 0 ${size * 0.5}px rgba(0, 0, 0, 0.8);
+            filter: blur(${layer.blur}px) brightness(1.3);
+            animation: flashFade ${0.4 + index * 0.1}s ease-out forwards;
+            mix-blend-mode: ${index === 0 ? 'multiply' : 'screen'};
+        `;
+        
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 600 + index * 100);
+    });
 }
 
 console.log('⚡ Portfolio System Active');
