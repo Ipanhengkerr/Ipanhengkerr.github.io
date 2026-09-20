@@ -1045,12 +1045,57 @@ function initBootcampModal() {
     });
 }
 
+// ===================================
+// JEH CERTIFICATION MODAL
+// ===================================
+function initJehModal() {
+    const modal = document.getElementById('jeh-modal');
+    const closeBtn = document.getElementById('jeh-modal-close');
+    const overlay = modal ? modal.querySelector('.bootcamp-modal-overlay') : null;
+    const img = document.getElementById('jeh-img');
+
+    if (!modal || !img) return;
+
+    // Get all JEH certification cards
+    const jehCards = document.querySelectorAll('[data-certification="jeh"], .certification-card[data-certification="jeh"]');
+
+    jehCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            img.src = 'junior-ethical-hacker-xcode.jpeg';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeJehModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => { img.src = ''; }, 300);
+    }
+
+    // Close button
+    if (closeBtn) closeBtn.addEventListener('click', closeJehModal);
+
+    // Close on overlay click
+    if (overlay) overlay.addEventListener('click', closeJehModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeJehModal();
+        }
+    });
+}
+
 function runSecondaryInits() {
     if (typeof initMusicPlayer === 'function') initMusicPlayer();
     if (typeof initCursorFlash === 'function') initCursorFlash();
     if (typeof initPdfModal === 'function') initPdfModal();
     if (typeof initCompetitionGallery === 'function') initCompetitionGallery();
     if (typeof initBootcampModal === 'function') initBootcampModal();
+    if (typeof initJehModal === 'function') initJehModal();
 }
 
 if (document.readyState === 'loading') {
