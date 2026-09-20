@@ -1151,7 +1151,7 @@ function initPentestTrainingModal() {
         card.style.cursor = 'pointer';
         card.addEventListener('click', (e) => {
             e.preventDefault();
-            pdfFrame.src = 'penetration-testing-training-6month.pdf';
+            pdfFrame.src = 'cyber-sentinel-secure-xcode.pdf';
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
