@@ -1012,8 +1012,8 @@ function initBootcampModal() {
 
     if (!modal || !img) return;
 
-    // Get all bootcamp cards
-    const bootcampCards = document.querySelectorAll('[data-bootcamp], .bootcamp-card');
+    // Get only IDN bootcamp cards (not pentest-training)
+    const bootcampCards = document.querySelectorAll('[data-bootcamp="dokumentasi"]');
 
     bootcampCards.forEach(card => {
         card.style.cursor = 'pointer';
