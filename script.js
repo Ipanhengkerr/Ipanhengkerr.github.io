@@ -545,7 +545,7 @@ function showCharacterBackground(characterId, side) {
                 "></div>`;
             } else {
                 characterImage.style.background = '';
-                characterImage.style.backgroundImage = `${theme.gradient}, url('${theme.image}')`;
+                characterImage.style.backgroundImage = `${theme.gradient}`;
                 characterImage.style.backgroundSize = 'cover';
                 characterImage.style.backgroundPosition = 'center';
                 characterImage.style.backgroundRepeat = 'no-repeat';
